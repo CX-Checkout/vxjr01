@@ -73,18 +73,18 @@ public class CheckoutTest {
     public void should_return_minus_one_for_skus_containing_illegal_elements() {
         String invalidSku = "V";
         String skusWithInvalidItem = "AVCD";
+        String noSkusWithSpaces = " ";
 
         assertThat(Checkout.checkout(invalidSku), is(-1));
         assertThat(Checkout.checkout(skusWithInvalidItem), is(-1));
+        assertThat(Checkout.checkout(noSkusWithSpaces), is(-1));
     }
 
     @Test
     public void should_return_zero_for_empty_basket() {
         String noSkus = "";
-        String noSkusWithSpaces = " ";
 
         assertThat(Checkout.checkout(noSkus), is(0));
-        assertThat(Checkout.checkout(noSkusWithSpaces), is(0));
     }
 
 }

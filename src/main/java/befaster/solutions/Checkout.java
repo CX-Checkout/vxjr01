@@ -4,6 +4,7 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.summingInt;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,11 +27,11 @@ public class Checkout {
     private static final Integer discountForTripleA = 20;
 
     public static Integer checkout(String skus) {
-        if (containsValidSkus(skus)) {
+        if (!containsValidSkus(skus)) {
             return -1;
         }
 
-        List<String> listOfSkusInBasket = asList(skus.split(""));
+        List<String> listOfSkusInBasket = skus.isEmpty() ? Collections.emptyList() : asList(skus.split(""));
 
         Map<String, Integer> numberOfSkusInBasket = numberOfEachSkuInBasket(listOfSkusInBasket);
         int discounts =
@@ -41,7 +42,7 @@ public class Checkout {
     }
 
     private static boolean containsValidSkus(String skus) {
-        return !skus.isEmpty() && !skus.matches("[ABCD]*");
+        return skus.matches("^[ABCD]*$");
     }
 
     private static Map<String, Integer> numberOfEachSkuInBasket(List<String> listOfSkusInBasket) {
