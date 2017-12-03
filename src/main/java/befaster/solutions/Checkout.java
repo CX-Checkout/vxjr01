@@ -26,6 +26,10 @@ public class Checkout {
     private static final Integer discountForTripleA = 20;
 
     public static Integer checkout(String skus) {
+        if (!skus.matches("[ABCD]+")) {
+            return -1;
+        }
+
         List<String> listOfSkus = asList(skus.split(""));
 
         Map<String, Integer> numberOfSkusInBasket = numberOfSkusInBasket(listOfSkus);

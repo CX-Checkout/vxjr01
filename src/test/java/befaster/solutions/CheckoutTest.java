@@ -68,4 +68,15 @@ public class CheckoutTest {
         assertThat(Checkout.checkout(skusWithDiscountForTripleAWithOtherSkus),
                 is(totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus));
     }
+
+    @Test
+    public void should_return_minus_one_for_skus_contains_illegal_elements() {
+        String invalidSku = "V";
+        String skusWithInvalidItem = "AVCD";
+        String noSkus = "";
+
+        assertThat(Checkout.checkout(invalidSku), is(-1));
+        assertThat(Checkout.checkout(skusWithInvalidItem), is(-1));
+        assertThat(Checkout.checkout(noSkus), is(-1));
+    }
 }
