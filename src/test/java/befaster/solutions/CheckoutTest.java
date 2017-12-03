@@ -81,7 +81,7 @@ public class CheckoutTest {
     @Test
     public void should_return_zero_for_empty_basket() {
         String noSkus = "";
-        String noSkusWithSpaces = " ";;
+        String noSkusWithSpaces = " ";
 
         assertThat(Checkout.checkout(noSkus), is(0));
         assertThat(Checkout.checkout(noSkusWithSpaces), is(0));

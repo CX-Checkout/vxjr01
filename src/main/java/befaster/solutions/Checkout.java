@@ -41,7 +41,7 @@ public class Checkout {
     }
 
     private static boolean containsValidSkus(String skus) {
-        return !skus.matches("[ABCD]*");
+        return !skus.isEmpty() && !skus.matches("[ABCD]*");
     }
 
     private static Map<String, Integer> numberOfEachSkuInBasket(List<String> listOfSkusInBasket) {
