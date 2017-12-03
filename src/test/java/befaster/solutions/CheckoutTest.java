@@ -77,6 +77,9 @@ public class CheckoutTest {
     }
 
     @Test
+    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_triple_A_and_each_five_As_SKU_in_basket() {
+
+    @Test
     public void should_return_minus_one_for_skus_containing_illegal_elements() {
         String invalidSku = "V";
         String skusWithInvalidItem = "AVCD";
