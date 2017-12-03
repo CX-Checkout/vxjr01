@@ -15,12 +15,14 @@ public class Checkout {
     private static final String B_SKU = "B";
     private static final String C_SKU = "C";
     private static final String D_SKU = "D";
+    private static final String E_SKU = "E";
 
     private static final HashMap<String, Integer> priceMap = new HashMap<String, Integer>() {{
         put(A_SKU, 50);
         put(B_SKU, 30);
         put(C_SKU, 20);
         put(D_SKU, 15);
+        put(E_SKU, 40);
     }};
 
     private static final Integer discountForDoubleB = 15;
@@ -44,7 +46,7 @@ public class Checkout {
     }
 
     private static boolean containsValidSkus(String skus) {
-        return skus.matches("^[ABCD]*$");
+        return skus.matches("^[ABCDE]*$");
     }
 
     private static Map<String, Integer> numberOfEachSkuInBasket(List<String> listOfSkusInBasket) {

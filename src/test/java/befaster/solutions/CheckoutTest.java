@@ -11,10 +11,12 @@ public class CheckoutTest {
     private static final String B_SKU = "B";
     private static final String C_SKU = "C";
     private static final String D_SKU = "D";
+    private static final String E_SKU = "E";
     private static final int A_SKU_PRICE = 50;
     private static final int B_SKU_PRICE = 30;
     private static final int C_SKU_PRICE = 20;
     private static final int D_SKU_PRICE = 15;
+    private static final int E_SKU_PRICE = 40;
 
     @Test
     public void should_return_price_of_each_sku_when_only_one_item_is_in_basket() {
@@ -22,14 +24,15 @@ public class CheckoutTest {
         assertThat(Checkout.checkout(B_SKU), is(B_SKU_PRICE));
         assertThat(Checkout.checkout(C_SKU), is(C_SKU_PRICE));
         assertThat(Checkout.checkout(D_SKU), is(D_SKU_PRICE));
+        assertThat(Checkout.checkout(E_SKU), is(E_SKU_PRICE));
     }
 
     @Test
     public void should_return_sum_of_prices_for_given_skus() {
-        String allSkusOnceInBasket = "ABCD";
-        String unorderedSkusInBasket = "BADADC";
-        int totalCheckoutValueForAllSkusOnceInBasket = A_SKU_PRICE + B_SKU_PRICE + C_SKU_PRICE + D_SKU_PRICE;
-        int totalCheckoutValueForUnorderedBasket = 2 * A_SKU_PRICE + B_SKU_PRICE + C_SKU_PRICE + 2 * D_SKU_PRICE;
+        String allSkusOnceInBasket = "ABCDE";
+        String unorderedSkusInBasket = "BADADCE";
+        int totalCheckoutValueForAllSkusOnceInBasket = A_SKU_PRICE + B_SKU_PRICE + C_SKU_PRICE + D_SKU_PRICE + E_SKU_PRICE;
+        int totalCheckoutValueForUnorderedBasket = 2 * A_SKU_PRICE + B_SKU_PRICE + C_SKU_PRICE + 2 * D_SKU_PRICE + E_SKU_PRICE;
 
         assertThat(Checkout.checkout(allSkusOnceInBasket), is(totalCheckoutValueForAllSkusOnceInBasket));
         assertThat(Checkout.checkout(unorderedSkusInBasket), is(totalCheckoutValueForUnorderedBasket));
