@@ -43,9 +43,14 @@ public class Checkout {
                 discountForEachFiveASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0)) +
                 discountForEachTripleASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0) - numberOfSkusDiscountedForFiveASkus(numberOfSkusInBasket.getOrDefault(A_SKU, 0))) +
                 discountForEachDoubleBSkuInBasket(numberOfSkusInBasket.getOrDefault(B_SKU, 0) - numberOfFreeBSkusForEachDoubleE(numberOfSkusInBasket.getOrDefault(B_SKU, 0), numberOfSkusInBasket.getOrDefault(E_SKU, 0))) +
-                freeOneBForEachDoubleE(numberOfSkusInBasket.getOrDefault(B_SKU, 0), numberOfSkusInBasket.getOrDefault(E_SKU, 0));
+                freeOneBForEachDoubleE(numberOfSkusInBasket.getOrDefault(B_SKU, 0), numberOfSkusInBasket.getOrDefault(E_SKU, 0) +
+                freeOneFForMiminumThreeFsInBasket(numberOfSkusInBasket.getOrDefault(F_SKU,0)));
 
         return listOfSkusInBasket.stream().mapToInt(priceMap::get).sum() - discounts;
+    }
+
+    private static Integer freeOneFForMiminumThreeFsInBasket(Integer numberOfFSkusInBasket) {
+        return numberOfFSkusInBasket >= 3 ? priceMap.get(F_SKU) : 0;
     }
 
     private static Integer numberOfFreeBSkusForEachDoubleE(Integer numberOfBSkusInBasket, Integer numberOfESkusInBasket) {

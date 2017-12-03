@@ -101,7 +101,7 @@ public class CheckoutTest {
     @Test
     public void should_return_sum_of_prices_for_given_skus_including_one_free_F_for_minimum_3_F_skus_in_basket() {
         String skusWithThreeFs = "FFF";
-        int totalCheckoutValueForThreeFs = 2 * E_SKU_PRICE;
+        int totalCheckoutValueForThreeFs = 2 * F_SKU_PRICE;
 
         assertThat(Checkout.checkout(skusWithThreeFs), is(totalCheckoutValueForThreeFs));
     }
