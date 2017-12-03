@@ -50,7 +50,7 @@ public class Checkout {
     }
 
     private static Integer freeOneFForMiminumThreeFsInBasket(Integer numberOfFSkusInBasket) {
-        return numberOfFSkusInBasket >= 3 ? priceMap.get(F_SKU) : 0;
+        return (numberOfFSkusInBasket / 3) * priceMap.get(F_SKU);
     }
 
     private static Integer numberOfFreeBSkusForEachDoubleE(Integer numberOfBSkusInBasket, Integer numberOfESkusInBasket) {
