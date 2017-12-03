@@ -23,12 +23,15 @@ public class Checkout {
     }};
 
     private static final Integer discountForDoubleB = 15;
+    private static final Integer discountForTripleA = 20;
 
     public static Integer checkout(String skus) {
         List<String> listOfSkus = asList(skus.split(""));
 
         Map<String, Integer> numberOfSkusInBasket = numberOfSkusInBasket(listOfSkus);
-        int discounts = discountForEachDoubleBSkuInBasket(numberOfSkusInBasket.getOrDefault(B_SKU, 0));
+        int discounts =
+                discountForEachDoubleBSkuInBasket(numberOfSkusInBasket.getOrDefault(B_SKU, 0)) +
+                discountForEachTripleASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0));
 
         return (listOfSkus).stream().mapToInt((String sku) -> priceMap.get(sku)).sum() - discounts;
     }
@@ -39,5 +42,9 @@ public class Checkout {
 
     private static int discountForEachDoubleBSkuInBasket(Integer numberOfBSkusInBasket) {
         return (numberOfBSkusInBasket / 2) * discountForDoubleB;
+    }
+
+    private static int discountForEachTripleASkuInBasket(Integer numberOfASkusInBasket) {
+        return (numberOfASkusInBasket / 3) * discountForTripleA;
     }
 }
