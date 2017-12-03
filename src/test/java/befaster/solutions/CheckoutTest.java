@@ -18,7 +18,6 @@ public class CheckoutTest {
     private static final int C_SKU_PRICE = 20;
     private static final int D_SKU_PRICE = 15;
     private static final int E_SKU_PRICE = 40;
-    private static final int F_SKU_PRICE = 10;
 
     @Test
     public void should_return_price_of_each_sku_when_only_one_item_is_in_basket() {
@@ -27,7 +26,6 @@ public class CheckoutTest {
         assertThat(Checkout.checkout(C_SKU), is(C_SKU_PRICE));
         assertThat(Checkout.checkout(D_SKU), is(D_SKU_PRICE));
         assertThat(Checkout.checkout(E_SKU), is(E_SKU_PRICE));
-        assertThat(Checkout.checkout(F_SKU), is(F_SKU_PRICE));
     }
 
     @Test

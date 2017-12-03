@@ -16,6 +16,7 @@ public class Checkout {
     private static final String C_SKU = "C";
     private static final String D_SKU = "D";
     private static final String E_SKU = "E";
+    private static final String F_SKU = "F";
 
     private static final HashMap<String, Integer> priceMap = new HashMap<String, Integer>() {{
         put(A_SKU, 50);
@@ -23,6 +24,7 @@ public class Checkout {
         put(C_SKU, 20);
         put(D_SKU, 15);
         put(E_SKU, 40);
+        put(F_SKU, 10);
     }};
 
     private static final Integer discountForDoubleB = 15;
