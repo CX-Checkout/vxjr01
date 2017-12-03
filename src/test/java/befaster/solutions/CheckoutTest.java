@@ -69,23 +69,14 @@ public class CheckoutTest {
                 is(totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus));
     }
 
-
-
     @Test
-    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_triple_A_and_each_SKU_in_basket() {
-        String skusWithDiscountForTripleA = "AAA";
-        String skusWithDiscountForTripleAMultipleTimes = "AAAAAAAAA";
-        String skusWithDiscountForTripleAWithOtherSkus = "ADADADADADAD";
+    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_triple_A_and_each_five_As_SKU_in_basket() {
+        String skusWithDiscountForTripleAandFiveAs = "AAAAA";
         int discountForTripleASkuInBasket = 20;
-        int totalCheckoutValueForBasket = 3 * A_SKU_PRICE - discountForTripleASkuInBasket;
-        int totalCheckoutValueForDiscountedMultipleTimesBasket = 9 * A_SKU_PRICE - 3 * discountForTripleASkuInBasket;
-        int totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus = 6 * A_SKU_PRICE + 6 * D_SKU_PRICE - 2 * discountForTripleASkuInBasket;
+        int discountForFiveAsSkuInBasket = 50;
+        int totalCheckoutValue = 5 * A_SKU_PRICE - discountForTripleASkuInBasket - discountForFiveAsSkuInBasket;
 
-        assertThat(Checkout.checkout(skusWithDiscountForTripleA), is(totalCheckoutValueForBasket));
-        assertThat(Checkout.checkout(skusWithDiscountForTripleAMultipleTimes),
-                is(totalCheckoutValueForDiscountedMultipleTimesBasket));
-        assertThat(Checkout.checkout(skusWithDiscountForTripleAWithOtherSkus),
-                is(totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus));
+        assertThat(Checkout.checkout(skusWithDiscountForTripleAandFiveAs), is(totalCheckoutValue));
     }
 
     @Test

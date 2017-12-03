@@ -35,6 +35,7 @@ public class Checkout {
 
         Map<String, Integer> numberOfSkusInBasket = numberOfEachSkuInBasket(listOfSkusInBasket);
         int discounts =
+                discountForEachFiveASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0)) +
                 discountForEachDoubleBSkuInBasket(numberOfSkusInBasket.getOrDefault(B_SKU, 0)) +
                 discountForEachTripleASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0));
 
@@ -55,5 +56,9 @@ public class Checkout {
 
     private static int discountForEachTripleASkuInBasket(Integer numberOfASkusInBasket) {
         return (numberOfASkusInBasket / 3) * discountForTripleA;
+    }
+
+    private static int discountForEachFiveASkuInBasket(Integer numberOfASkusInBasket) {
+        return (numberOfASkusInBasket / 5) * discountForTripleA;
     }
 }
