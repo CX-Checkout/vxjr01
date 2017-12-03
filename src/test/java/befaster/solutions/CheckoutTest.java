@@ -74,9 +74,11 @@ public class CheckoutTest {
         String invalidSku = "V";
         String skusWithInvalidItem = "AVCD";
         String noSkus = "";
+        String noSkusWithSpaces = " ";
 
         assertThat(Checkout.checkout(invalidSku), is(-1));
         assertThat(Checkout.checkout(skusWithInvalidItem), is(-1));
-        assertThat(Checkout.checkout(noSkus), is(-1));
+        assertThat(Checkout.checkout(noSkusWithSpaces), is(-1));
+        assertThat(Checkout.checkout(noSkus), is(0));
     }
 }
