@@ -53,30 +53,24 @@ public class CheckoutTest {
     }
 
     @Test
-    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_triple_A_SKU_in_basket() {
+    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_triple_A_and_each_five_As_SKU_in_basket() {
         String skusWithDiscountForTripleA = "AAA";
+        String skusWithDiscountForTripleAandFiveAs = "AAAAA";
         String skusWithDiscountForTripleAMultipleTimes = "AAAAAAAAA";
         String skusWithDiscountForTripleAWithOtherSkus = "ADADADADADAD";
         int discountForTripleASkuInBasket = 20;
+        int discountForFiveAsSkuInBasket = 50;
         int totalCheckoutValueForBasket = 3 * A_SKU_PRICE - discountForTripleASkuInBasket;
+        int totalCheckoutValueForTripleAandFiveAs = 5 * A_SKU_PRICE - discountForTripleASkuInBasket - discountForFiveAsSkuInBasket;
         int totalCheckoutValueForDiscountedMultipleTimesBasket = 9 * A_SKU_PRICE - 3 * discountForTripleASkuInBasket;
         int totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus = 6 * A_SKU_PRICE + 6 * D_SKU_PRICE - 2 * discountForTripleASkuInBasket;
 
         assertThat(Checkout.checkout(skusWithDiscountForTripleA), is(totalCheckoutValueForBasket));
+        assertThat(Checkout.checkout(skusWithDiscountForTripleAandFiveAs), is(totalCheckoutValueForTripleAandFiveAs));
         assertThat(Checkout.checkout(skusWithDiscountForTripleAMultipleTimes),
                 is(totalCheckoutValueForDiscountedMultipleTimesBasket));
         assertThat(Checkout.checkout(skusWithDiscountForTripleAWithOtherSkus),
                 is(totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus));
-    }
-
-    @Test
-    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_triple_A_and_each_five_As_SKU_in_basket() {
-        String skusWithDiscountForTripleAandFiveAs = "AAAAA";
-        int discountForTripleASkuInBasket = 20;
-        int discountForFiveAsSkuInBasket = 50;
-        int totalCheckoutValue = 5 * A_SKU_PRICE - discountForTripleASkuInBasket - discountForFiveAsSkuInBasket;
-
-        assertThat(Checkout.checkout(skusWithDiscountForTripleAandFiveAs), is(totalCheckoutValue));
     }
 
     @Test
