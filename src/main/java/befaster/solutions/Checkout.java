@@ -29,6 +29,6 @@ public class Checkout {
 
         return (listOfSkus).stream()
                 .mapToInt((String sku) -> priceMap.get(sku))
-                .sum() - (numberOfBSkusInBasket >= 2 ? discountForDoubleB : 0);
+                .sum() - ((numberOfBSkusInBasket / 2) * discountForDoubleB);
     }
 }
