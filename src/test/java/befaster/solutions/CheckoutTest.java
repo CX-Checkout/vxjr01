@@ -61,19 +61,20 @@ public class CheckoutTest {
         int discountForFiveAsSkuInBasket = 50;
         String skusWithDiscountForTripleA = "AAA";
         int totalCheckoutValueForBasket = 3 * A_SKU_PRICE - discountForTripleASkuInBasket;
-        String skusWithDiscountForTripleAandFiveAs = "AAAAA";
-        int totalCheckoutValueForTripleAandFiveAs = 5 * A_SKU_PRICE - discountForFiveAsSkuInBasket;
-        String skusWithDiscountForTripleAMultipleTimes = "AAAAAAAAAA";
-        int totalCheckoutValueForDiscountedMultipleTimesBasket = 10 * A_SKU_PRICE - 2 * discountForFiveAsSkuInBasket;
-        String skusWithDiscountForTripleAWithOtherSkus = "ADADADADADAD";
-        int totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus = 6 * A_SKU_PRICE + 6 * D_SKU_PRICE - discountForFiveAsSkuInBasket;
+        String skusWithDiscountForFiveAs = "AAAAA";
+        int totalCheckoutValueForFiveAs = 5 * A_SKU_PRICE - discountForFiveAsSkuInBasket;
+        String skusWithDiscountForFiveAsMultipleTimes = "AAAAAAAAAA";
+        int totalCheckoutValueForFiveAsMultipleTimes = 10 * A_SKU_PRICE - 2 * discountForFiveAsSkuInBasket;
+        String skusWithDiscountForFiveAsAndTripleA = "AAAAAAAAAAAAAA";
+        int totalCheckoutValueForFiveAsAndTripleA = 14 * A_SKU_PRICE - 2 * discountForFiveAsSkuInBasket - discountForTripleASkuInBasket;
+        String skusWithMixedDiscounts = "ADADADADADAD";
+        int totalCheckoutValueForMixedDiscounts = 6 * A_SKU_PRICE + 6 * D_SKU_PRICE - discountForFiveAsSkuInBasket;
 
         assertThat(Checkout.checkout(skusWithDiscountForTripleA), is(totalCheckoutValueForBasket));
-        assertThat(Checkout.checkout(skusWithDiscountForTripleAandFiveAs), is(totalCheckoutValueForTripleAandFiveAs));
-        assertThat(Checkout.checkout(skusWithDiscountForTripleAMultipleTimes),
-                is(totalCheckoutValueForDiscountedMultipleTimesBasket));
-        assertThat(Checkout.checkout(skusWithDiscountForTripleAWithOtherSkus),
-                is(totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus));
+        assertThat(Checkout.checkout(skusWithDiscountForFiveAs), is(totalCheckoutValueForFiveAs));
+        assertThat(Checkout.checkout(skusWithDiscountForFiveAsMultipleTimes), is(totalCheckoutValueForFiveAsMultipleTimes));
+        assertThat(Checkout.checkout(skusWithMixedDiscounts), is(totalCheckoutValueForMixedDiscounts));
+        assertThat(Checkout.checkout(skusWithDiscountForFiveAsAndTripleA), is(totalCheckoutValueForFiveAsAndTripleA));
     }
 
     @Test
