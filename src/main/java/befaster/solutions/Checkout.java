@@ -13,9 +13,8 @@ public class Checkout {
     }};
 
     public static Integer checkout(String skus) {
-        asList(skus.split("")).stream()
+        return asList(skus.split("")).stream()
                 .mapToInt((String sku) -> priceMap.get(sku))
-                .flatMap();
-        return priceMap.get(skus);
+                .sum();
     }
 }
