@@ -77,7 +77,12 @@ public class CheckoutTest {
     }
 
     @Test
-    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_triple_A_and_each_five_As_SKU_in_basket() {
+    public void should_return_sum_of_prices_for_given_skus_including_one_free_B_sku_for_each_double_E_in_basket() {
+        String skusWithDoubleEAndSingleB = "EBE";
+        int totalCheckoutValueForDoubleEAndSingleB = 2 * E_SKU_PRICE;
+        
+        assertThat(Checkout.checkout(skusWithDoubleEAndSingleB), is(totalCheckoutValueForDoubleEAndSingleB));
+    }
 
     @Test
     public void should_return_minus_one_for_skus_containing_illegal_elements() {
