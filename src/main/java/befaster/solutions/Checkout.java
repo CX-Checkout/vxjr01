@@ -30,7 +30,7 @@ public class Checkout {
             return -1;
         }
 
-        List<String> listOfSkusInBasket = asList(skus.split(""));
+        List<String> listOfSkusInBasket = asList(skus.trim().split(""));
 
         Map<String, Integer> numberOfSkusInBasket = numberOfEachSkuInBasket(listOfSkusInBasket);
         int discounts =
@@ -41,7 +41,7 @@ public class Checkout {
     }
 
     private static boolean containsValidSkus(String skus) {
-        return !skus.matches("[ABCD]+");
+        return !skus.trim().matches("[ABCD]*");
     }
 
     private static Map<String, Integer> numberOfEachSkuInBasket(List<String> listOfSkusInBasket) {
