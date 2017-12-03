@@ -99,7 +99,7 @@ public class CheckoutTest {
     }
 
     @Test
-    public void should_return_sum_of_prices_for_given_skus_including_one_free_F_for_each_2_F_SKUs_and_minimum_3_F_skus_in_basket() {
+    public void should_return_sum_of_prices_for_given_skus_including_one_free_F_for_each_3_F_SKUs_in_basket() {
         String skusWithThreeFs = "FFF";
         int totalCheckoutValueForThreeFs = 2 * F_SKU_PRICE;
         String skusWithSixFs = "FFFFFF";
