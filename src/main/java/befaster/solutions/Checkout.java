@@ -52,7 +52,7 @@ public class Checkout {
     }
 
     private static int freeOneBForEachDoubleE(Integer numberOfBSkusInBasket, Integer numberOfESkusInBasket) {
-        return Math.min(numberOfESkusInBasket / 2, numberOfBSkusInBasket) * priceMap.get(B_SKU);
+        return Math.min((int)numberOfESkusInBasket / 2, numberOfBSkusInBasket) * priceMap.get(B_SKU);
     }
 
     private static Map<String, Integer> numberOfEachSkuInBasket(List<String> listOfSkusInBasket) {
