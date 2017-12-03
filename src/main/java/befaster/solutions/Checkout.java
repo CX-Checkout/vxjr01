@@ -47,12 +47,12 @@ public class Checkout {
         return listOfSkusInBasket.stream().mapToInt(priceMap::get).sum() - discounts;
     }
 
-    private static int freeOneBForEachDoubleE(Integer numberOfBSkusInBasket, Integer numberOfESkusInBasket) {
-        return Math.min(numberOfESkusInBasket / 2, numberOfBSkusInBasket) * priceMap.get(B_SKU);
-    }
-
     private static boolean containsValidSkus(String skus) {
         return skus.matches("^[ABCDE]*$");
+    }
+
+    private static int freeOneBForEachDoubleE(Integer numberOfBSkusInBasket, Integer numberOfESkusInBasket) {
+        return Math.min(numberOfESkusInBasket / 2, numberOfBSkusInBasket) * priceMap.get(B_SKU);
     }
 
     private static Map<String, Integer> numberOfEachSkuInBasket(List<String> listOfSkusInBasket) {
