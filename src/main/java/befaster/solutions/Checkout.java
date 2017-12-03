@@ -1,8 +1,8 @@
 package befaster.solutions;
 
 import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingInt;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,13 +20,16 @@ public class Checkout {
         put(D_SKU,15);
     }};
 
+    private static final Integer discountForDoubleB = 15;
+
     public static Integer checkout(String skus) {
         List<String> listOfSkus = asList(skus.split(""));
-        Long numberOfBSkusInBasket = listOfSkus.stream()
-                .collect(groupingBy(Function.identity(), counting())).get(B_SKU);
+        Integer numberOfBSkusInBasket = listOfSkus.stream()
+                .collect(groupingBy(Function.identity(), summingInt(e -> 1))).getOrDefault(B_SKU, 0);
+
 
         return (listOfSkus).stream()
                 .mapToInt((String sku) -> priceMap.get(sku))
-                .sum();
+                .sum() - (numberOfBSkusInBasket > 2 ? discountForDoubleB : 0);
     }
 }
