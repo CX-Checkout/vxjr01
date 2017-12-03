@@ -39,23 +39,27 @@ public class Checkout {
         Map<String, Integer> numberOfSkusInBasket = numberOfEachSkuInBasket(listOfSkusInBasket);
         int discounts =
                 discountForEachFiveASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0)) +
+                discountForEachTripleASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0) - numberOfSkusDiscountedForFiveASkus(numberOfSkusInBasket.getOrDefault(A_SKU, 0))) +
                 discountForEachDoubleBSkuInBasket(numberOfSkusInBasket.getOrDefault(B_SKU, 0)) +
-                discountForEachTripleASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0)) +
                 freeOneBForEachDoubleE(numberOfSkusInBasket.getOrDefault(B_SKU, 0), numberOfSkusInBasket.getOrDefault(E_SKU, 0));
 
         return listOfSkusInBasket.stream().mapToInt(priceMap::get).sum() - discounts;
+    }
+
+    private static Integer numberOfSkusDiscountedForFiveASkus(Integer numberOfASkusInBasket) {
+        return (numberOfASkusInBasket / 5) * 5;
     }
 
     private static boolean containsValidSkus(String skus) {
         return skus.matches("^[ABCDE]*$");
     }
 
-    private static int freeOneBForEachDoubleE(Integer numberOfBSkusInBasket, Integer numberOfESkusInBasket) {
-        return Math.min(numberOfESkusInBasket / 2, numberOfBSkusInBasket) * priceMap.get(B_SKU);
-    }
-
     private static Map<String, Integer> numberOfEachSkuInBasket(List<String> listOfSkusInBasket) {
         return listOfSkusInBasket.stream().collect(groupingBy(Function.identity(), summingInt(e -> 1)));
+    }
+
+    private static int freeOneBForEachDoubleE(Integer numberOfBSkusInBasket, Integer numberOfESkusInBasket) {
+        return Math.min(numberOfESkusInBasket / 2, numberOfBSkusInBasket) * priceMap.get(B_SKU);
     }
 
     private static int discountForEachDoubleBSkuInBasket(Integer numberOfBSkusInBasket) {
