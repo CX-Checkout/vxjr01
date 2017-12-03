@@ -86,11 +86,13 @@ public class CheckoutTest {
         int totalCheckoutValueForDoubleEAndMultipleB = 2 * E_SKU_PRICE + 2 * B_SKU_PRICE - discountForDoubleBSkuInBasket;
         String skusWithoutBAndDoubleEs = "EEEE";
         int totalCheckoutValueForBasketWithoutBAndDoublesEs = 4 * E_SKU_PRICE;
-        String skusWith =
+        String skusWithAllBsDiscounted = "EEEEBB";
+        int totalCheckoutValueForAllBsDiscounted = 4 * E_SKU_PRICE;
 
         assertThat(Checkout.checkout(skusWithDoubleEAndSingleB), is(totalCheckoutValueForDoubleEAndSingleB));
         assertThat(Checkout.checkout(skusWithDoubleEAndMultipleB), is(totalCheckoutValueForDoubleEAndMultipleB));
         assertThat(Checkout.checkout(skusWithoutBAndDoubleEs), is(totalCheckoutValueForBasketWithoutBAndDoublesEs));
+        assertThat(Checkout.checkout(skusWithAllBsDiscounted), is(totalCheckoutValueForAllBsDiscounted));
     }
 
     @Test
