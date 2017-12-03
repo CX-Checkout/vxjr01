@@ -99,11 +99,14 @@ public class CheckoutTest {
     }
 
     @Test
-    public void should_return_sum_of_prices_for_given_skus_including_one_free_F_for__in_basket() {
+    public void should_return_sum_of_prices_for_given_skus_including_one_free_F_for_minimum_3_F_skus_in_basket() {
+        String skusWithThreeFs = "FFF";
+        int totalCheckoutValueForThreeFs = 2 * E_SKU_PRICE;
 
+        assertThat(Checkout.checkout(skusWithThreeFs), is(totalCheckoutValueForThreeFs));
+    }
 
-
-        @Test
+    @Test
     public void should_return_minus_one_for_skus_containing_illegal_elements() {
         String invalidSku = "V";
         String skusWithInvalidItem = "AVCD";
