@@ -40,9 +40,15 @@ public class Checkout {
         int discounts =
                 discountForEachFiveASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0)) +
                 discountForEachDoubleBSkuInBasket(numberOfSkusInBasket.getOrDefault(B_SKU, 0)) +
-                discountForEachTripleASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0));
+                discountForEachTripleASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0)) +
+                        freeOneBForEachDoubleE(numberOfSkusInBasket.getOrDefault(E_SKU, 0))
+                ;
 
         return listOfSkusInBasket.stream().mapToInt(priceMap::get).sum() - discounts;
+    }
+
+    private static int freeOneBForEachDoubleE(Integer numberOfESkusInBasket) {
+        return (numberOfESkusInBasket / 2) * priceMap.get(B_SKU);
     }
 
     private static boolean containsValidSkus(String skus) {
