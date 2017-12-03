@@ -43,4 +43,9 @@ public class CheckoutTest {
         assertThat(Checkout.checkout(unorderedSkusInBasket), is(totalCheckoutValueForBasket));
     }
 
-}
+    @Test
+    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_special_offers() {
+        String skusWithDiscounted
+        int discountForDoubleBSkuInBasket = 15;
+
+    }
