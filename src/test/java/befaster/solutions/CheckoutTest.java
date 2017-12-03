@@ -45,7 +45,10 @@ public class CheckoutTest {
 
     @Test
     public void should_return_sum_of_prices_for_given_skus_including_discounts_for_special_offers() {
-        String skusWithDiscounted
+        String skusWithDiscountForDoubleB = "BB";
         int discountForDoubleBSkuInBasket = 15;
+        int totalCheckoutValueForBasket = 2 * B_SKU_PRICE - discountForDoubleBSkuInBasket;
 
+        assertThat(Checkout.checkout(skusWithDiscountForDoubleB), is(totalCheckoutValueForBasket));
     }
+}
