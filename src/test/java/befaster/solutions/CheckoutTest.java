@@ -80,12 +80,15 @@ public class CheckoutTest {
     public void should_return_sum_of_prices_for_given_skus_including_one_free_B_sku_for_each_double_E_in_basket() {
         String skusWithDoubleEAndSingleB = "EBE";
         String skusWithDoubleEAndMultipleB = "EBEBB";
+        String skusWithoutBAndDoubleEs = "EEEE";
         int discountForDoubleBSkuInBasket = 15;
         int totalCheckoutValueForDoubleEAndSingleB = 2 * E_SKU_PRICE;
         int totalCheckoutValueForDoubleEAndMultipleB = 2 * E_SKU_PRICE + 2 * B_SKU_PRICE - discountForDoubleBSkuInBasket;
+        int totalCheckoutValueForBasketWithoutBAndDoublesEs = 4 * E_SKU_PRICE;
 
         assertThat(Checkout.checkout(skusWithDoubleEAndSingleB), is(totalCheckoutValueForDoubleEAndSingleB));
         assertThat(Checkout.checkout(skusWithDoubleEAndMultipleB), is(totalCheckoutValueForDoubleEAndMultipleB));
+        assertThat(Checkout.checkout(skusWithoutBAndDoubleEs), is(totalCheckoutValueForBasketWithoutBAndDoublesEs));
     }
 
     @Test
