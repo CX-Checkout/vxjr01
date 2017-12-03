@@ -27,20 +27,12 @@ public class CheckoutTest {
     @Test
     public void should_return_sum_of_prices_for_given_skus() {
         String allSkusOnceInBasket = "ABCD";
-        String allSkusTwiceInBasket = "AABBCCDD";
+        String unorderedSkusInBasket = "BADADC";
         int totalCheckoutValueForAllSkusOnceInBasket = A_SKU_PRICE + B_SKU_PRICE + C_SKU_PRICE + D_SKU_PRICE;
-        int totalCheckoutValueForAllSkusTwiceInBasket = 2 * A_SKU_PRICE + 2 * B_SKU_PRICE + 2 * C_SKU_PRICE + 2 * D_SKU_PRICE;
+        int totalCheckoutValueForUnorderedBasket = 2 * A_SKU_PRICE + B_SKU_PRICE + C_SKU_PRICE + 2 * D_SKU_PRICE;
 
         assertThat(Checkout.checkout(allSkusOnceInBasket), is(totalCheckoutValueForAllSkusOnceInBasket));
-        assertThat(Checkout.checkout(allSkusTwiceInBasket), is(totalCheckoutValueForAllSkusTwiceInBasket));
-    }
-
-    @Test
-    public void should_return_sum_of_prices_for_given_skus_without_taking_into_account_order() {
-        String unorderedSkusInBasket = "BADADC";
-        int totalCheckoutValueForBasket = 2 * A_SKU_PRICE + B_SKU_PRICE + C_SKU_PRICE + 2 * D_SKU_PRICE;
-
-        assertThat(Checkout.checkout(unorderedSkusInBasket), is(totalCheckoutValueForBasket));
+        assertThat(Checkout.checkout(unorderedSkusInBasket), is(totalCheckoutValueForUnorderedBasket));
     }
 
     @Test

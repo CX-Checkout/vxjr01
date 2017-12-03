@@ -22,7 +22,7 @@ public class Checkout {
 
     private static final Integer discountForDoubleB = 15;
 
-    public Integer checkout(String skus) {
+    public static Integer checkout(String skus) {
         List<String> listOfSkus = asList(skus.split(""));
         Integer numberOfBSkusInBasket = listOfSkus.stream()
                 .collect(groupingBy(Function.identity(), summingInt(e -> 1))).getOrDefault(B_SKU, 0);
