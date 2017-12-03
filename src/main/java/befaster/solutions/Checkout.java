@@ -13,6 +13,7 @@ public class Checkout {
     }};
 
     public static Integer checkout(String skus) {
+        skus.
         return asList(skus.split("")).stream()
                 .mapToInt((String sku) -> priceMap.get(sku))
                 .sum();
