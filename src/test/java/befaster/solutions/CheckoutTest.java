@@ -38,9 +38,12 @@ public class CheckoutTest {
     @Test
     public void should_return_sum_of_prices_for_given_skus_including_discounts_for_special_offers() {
         String skusWithDiscountForDoubleB = "BB";
+        String skusWithDiscountForDoubleBMultipleTimes = "BBBBBBB";
         int discountForDoubleBSkuInBasket = 15;
         int totalCheckoutValueForBasket = 2 * B_SKU_PRICE - discountForDoubleBSkuInBasket;
+        int totalCheckoutValueForDiscountedMultipleTimesBasket = 7 * B_SKU_PRICE - 3 * discountForDoubleBSkuInBasket;
 
         assertThat(Checkout.checkout(skusWithDiscountForDoubleB), is(totalCheckoutValueForBasket));
+        assertThat(Checkout.checkout(skusWithDiscountForDoubleBMultipleTimes), is(totalCheckoutValueForDiscountedMultipleTimesBasket));
     }
 }
