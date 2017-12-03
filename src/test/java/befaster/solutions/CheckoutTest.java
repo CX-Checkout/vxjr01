@@ -27,9 +27,12 @@ public class CheckoutTest {
     @Test
     public void should_return_sum_of_prices_for_given_skus() {
         String allSkusOnceInBasket = "ABCD";
+        String allSkusTwiceInBasket = "AABBCCDD";
         int totalCheckoutValueForAllSkusOnceInBasket = A_SKU_PRICE + B_SKU_PRICE + C_SKU_PRICE + D_SKU_PRICE;
+        int totalCheckoutValueForAllSkusTwiceInBasket = 2 * A_SKU_PRICE + 2 * B_SKU_PRICE + 2 * C_SKU_PRICE + 2 * D_SKU_PRICE;
 
         assertThat(Checkout.checkout(allSkusOnceInBasket), is(totalCheckoutValueForAllSkusOnceInBasket));
+        assertThat(Checkout.checkout(allSkusTwiceInBasket), is(totalCheckoutValueForAllSkusTwiceInBasket));
 
     }
 
