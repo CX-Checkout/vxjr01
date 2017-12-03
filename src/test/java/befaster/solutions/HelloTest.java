@@ -9,14 +9,14 @@ public class HelloTest {
 
     @Test
     public void should_return_hello_world() {
-        assertThat(Hello.hello("Robert"), is("Hello Robert!"));
-        assertThat(Hello.hello("Mirek"), is("Hello Mirek!"));
+        assertThat(Hello.hello("Robert"), is("Hello, World!"));
+        assertThat(Hello.hello("Mirek"), is("Hello, World!"));
     }
 
     @Test
     public void should_return_hello_world_when_name_is_undefined() {
-        assertThat(Hello.hello(""), is("Hello World!"));
-        assertThat(Hello.hello(null), is("Hello World!"));
+        assertThat(Hello.hello(""), is("Hello, World!"));
+        assertThat(Hello.hello(null), is("Hello, World!"));
     }
 
 }
