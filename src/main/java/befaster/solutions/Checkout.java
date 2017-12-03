@@ -1,5 +1,7 @@
 package befaster.solutions;
 
+import static java.util.Arrays.asList;
+
 import java.util.HashMap;
 
 public class Checkout {
@@ -11,6 +13,9 @@ public class Checkout {
     }};
 
     public static Integer checkout(String skus) {
+        asList(skus.split("")).stream()
+                .mapToInt((String sku) -> priceMap.get(sku))
+                .flatMap();
         return priceMap.get(skus);
     }
 }
