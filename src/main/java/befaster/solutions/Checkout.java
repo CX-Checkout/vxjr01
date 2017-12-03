@@ -6,6 +6,7 @@ import static java.util.stream.Collectors.summingInt;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 public class Checkout {
@@ -13,22 +14,30 @@ public class Checkout {
     private static final String B_SKU = "B";
     private static final String C_SKU = "C";
     private static final String D_SKU = "D";
+
     private static final HashMap<String, Integer> priceMap = new HashMap<String, Integer>() {{
-        put(A_SKU,50);
-        put(B_SKU,30);
-        put(C_SKU,20);
-        put(D_SKU,15);
+        put(A_SKU, 50);
+        put(B_SKU, 30);
+        put(C_SKU, 20);
+        put(D_SKU, 15);
     }};
 
     private static final Integer discountForDoubleB = 15;
 
     public static Integer checkout(String skus) {
         List<String> listOfSkus = asList(skus.split(""));
-        Integer numberOfBSkusInBasket = listOfSkus.stream()
-                .collect(groupingBy(Function.identity(), summingInt(e -> 1))).getOrDefault(B_SKU, 0);
 
-        return (listOfSkus).stream()
-                .mapToInt((String sku) -> priceMap.get(sku))
-                .sum() - ((numberOfBSkusInBasket / 2) * discountForDoubleB);
+        Map<String, Integer> numberOfSkusInBasket = numberOfSkusInBasket(listOfSkus);
+        int discounts = discountForEachDoubleBSkuInBasket(numberOfSkusInBasket.getOrDefault(B_SKU, 0));
+
+        return (listOfSkus).stream().mapToInt((String sku) -> priceMap.get(sku)).sum() - discounts;
+    }
+
+    private static Map<String, Integer> numberOfSkusInBasket(List<String> listOfSkus) {
+        return listOfSkus.stream().collect(groupingBy(Function.identity(), summingInt(e -> 1)));
+    }
+
+    private static int discountForEachDoubleBSkuInBasket(Integer numberOfBSkusInBasket) {
+        return (numberOfBSkusInBasket / 2) * discountForDoubleB;
     }
 }
