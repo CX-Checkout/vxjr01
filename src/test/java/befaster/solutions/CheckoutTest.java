@@ -57,16 +57,16 @@ public class CheckoutTest {
 
     @Test
     public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_triple_A_and_each_five_As_SKU_in_basket() {
-        String skusWithDiscountForTripleA = "AAA";
-        String skusWithDiscountForTripleAandFiveAs = "AAAAA";
-        String skusWithDiscountForTripleAMultipleTimes = "AAAAAAAAAA";
-        String skusWithDiscountForTripleAWithOtherSkus = "ADADADADADAD";
         int discountForTripleASkuInBasket = 20;
         int discountForFiveAsSkuInBasket = 50;
+        String skusWithDiscountForTripleA = "AAA";
         int totalCheckoutValueForBasket = 3 * A_SKU_PRICE - discountForTripleASkuInBasket;
-        int totalCheckoutValueForTripleAandFiveAs = 5 * A_SKU_PRICE - discountForTripleASkuInBasket - discountForFiveAsSkuInBasket;
-        int totalCheckoutValueForDiscountedMultipleTimesBasket = 10 * A_SKU_PRICE - 3 * discountForTripleASkuInBasket - 2 * discountForFiveAsSkuInBasket;
-        int totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus = 6 * A_SKU_PRICE + 6 * D_SKU_PRICE - 2 * discountForTripleASkuInBasket - discountForFiveAsSkuInBasket;
+        String skusWithDiscountForTripleAandFiveAs = "AAAAA";
+        int totalCheckoutValueForTripleAandFiveAs = 5 * A_SKU_PRICE - discountForFiveAsSkuInBasket;
+        String skusWithDiscountForTripleAMultipleTimes = "AAAAAAAAAA";
+        int totalCheckoutValueForDiscountedMultipleTimesBasket = 10 * A_SKU_PRICE - 2 * discountForFiveAsSkuInBasket;
+        String skusWithDiscountForTripleAWithOtherSkus = "ADADADADADAD";
+        int totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus = 6 * A_SKU_PRICE + 6 * D_SKU_PRICE - discountForFiveAsSkuInBasket;
 
         assertThat(Checkout.checkout(skusWithDiscountForTripleA), is(totalCheckoutValueForBasket));
         assertThat(Checkout.checkout(skusWithDiscountForTripleAandFiveAs), is(totalCheckoutValueForTripleAandFiveAs));
