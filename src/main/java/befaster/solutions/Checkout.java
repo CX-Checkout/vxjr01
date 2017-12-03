@@ -25,6 +25,7 @@ public class Checkout {
 
     private static final Integer discountForDoubleB = 15;
     private static final Integer discountForTripleA = 20;
+    private static final Integer discountForFiveAs = 50;
 
     public static Integer checkout(String skus) {
         if (!containsValidSkus(skus)) {
@@ -59,6 +60,6 @@ public class Checkout {
     }
 
     private static int discountForEachFiveASkuInBasket(Integer numberOfASkusInBasket) {
-        return (numberOfASkusInBasket / 5) * discountForTripleA;
+        return (numberOfASkusInBasket / 5) * discountForFiveAs;
     }
 }
