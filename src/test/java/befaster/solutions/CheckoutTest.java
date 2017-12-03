@@ -70,7 +70,7 @@ public class CheckoutTest {
     }
 
     @Test
-    public void should_return_minus_one_for_skus_contains_illegal_elements() {
+    public void should_return_minus_one_for_skus_containing_illegal_elements() {
         String invalidSku = "V";
         String skusWithInvalidItem = "AVCD";
         String noSkus = "";

@@ -26,22 +26,26 @@ public class Checkout {
     private static final Integer discountForTripleA = 20;
 
     public static Integer checkout(String skus) {
-        if (!skus.matches("[ABCD]+")) {
+        if (containsValidSkus(skus)) {
             return -1;
         }
 
-        List<String> listOfSkus = asList(skus.split(""));
+        List<String> listOfSkusInBasket = asList(skus.split(""));
 
-        Map<String, Integer> numberOfSkusInBasket = numberOfSkusInBasket(listOfSkus);
+        Map<String, Integer> numberOfSkusInBasket = numberOfEachSkuInBasket(listOfSkusInBasket);
         int discounts =
                 discountForEachDoubleBSkuInBasket(numberOfSkusInBasket.getOrDefault(B_SKU, 0)) +
                 discountForEachTripleASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0));
 
-        return (listOfSkus).stream().mapToInt((String sku) -> priceMap.get(sku)).sum() - discounts;
+        return listOfSkusInBasket.stream().mapToInt(priceMap::get).sum() - discounts;
     }
 
-    private static Map<String, Integer> numberOfSkusInBasket(List<String> listOfSkus) {
-        return listOfSkus.stream().collect(groupingBy(Function.identity(), summingInt(e -> 1)));
+    private static boolean containsValidSkus(String skus) {
+        return !skus.matches("[ABCD]+");
+    }
+
+    private static Map<String, Integer> numberOfEachSkuInBasket(List<String> listOfSkusInBasket) {
+        return listOfSkusInBasket.stream().collect(groupingBy(Function.identity(), summingInt(e -> 1)));
     }
 
     private static int discountForEachDoubleBSkuInBasket(Integer numberOfBSkusInBasket) {
