@@ -43,10 +43,29 @@ public class CheckoutTest {
         int discountForDoubleBSkuInBasket = 15;
         int totalCheckoutValueForBasket = 2 * B_SKU_PRICE - discountForDoubleBSkuInBasket;
         int totalCheckoutValueForDiscountedMultipleTimesBasket = 7 * B_SKU_PRICE - 3 * discountForDoubleBSkuInBasket;
-        int totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus = 5 * D_SKU_PRICE +  5 * B_SKU_PRICE - 2 * discountForDoubleBSkuInBasket;
+        int totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus = 5 * D_SKU_PRICE + 5 * B_SKU_PRICE - 2 * discountForDoubleBSkuInBasket;
 
         assertThat(Checkout.checkout(skusWithDiscountForDoubleB), is(totalCheckoutValueForBasket));
-        assertThat(Checkout.checkout(skusWithDiscountForDoubleBMultipleTimes), is(totalCheckoutValueForDiscountedMultipleTimesBasket));
-        assertThat(Checkout.checkout(skusWithDiscountForDoubleBWithOtherSkus), is(totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus));
+        assertThat(Checkout.checkout(skusWithDiscountForDoubleBMultipleTimes),
+                is(totalCheckoutValueForDiscountedMultipleTimesBasket));
+        assertThat(Checkout.checkout(skusWithDiscountForDoubleBWithOtherSkus),
+                is(totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus));
+    }
+
+    @Test
+    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_triple_A_SKU_in_basket() {
+        String skusWithDiscountForTripleA = "AAA";
+        String skusWithDiscountForTripleAMultipleTimes = "AAAAAAAAA";
+        String skusWithDiscountForTripleAWithOtherSkus = "ADADADADADAD";
+        int discountForTripleASkuInBasket = 20;
+        int totalCheckoutValueForBasket = 3 * A_SKU_PRICE - discountForTripleASkuInBasket;
+        int totalCheckoutValueForDiscountedMultipleTimesBasket = 9 * A_SKU_PRICE - 3 * discountForTripleASkuInBasket;
+        int totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus = 6 * A_SKU_PRICE + 6 * D_SKU_PRICE - 2 * discountForTripleASkuInBasket;
+
+        assertThat(Checkout.checkout(skusWithDiscountForTripleA), is(totalCheckoutValueForBasket));
+        assertThat(Checkout.checkout(skusWithDiscountForTripleAMultipleTimes),
+                is(totalCheckoutValueForDiscountedMultipleTimesBasket));
+        assertThat(Checkout.checkout(skusWithDiscountForTripleAWithOtherSkus),
+                is(totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus));
     }
 }
