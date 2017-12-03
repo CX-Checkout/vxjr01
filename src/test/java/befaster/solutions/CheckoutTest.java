@@ -43,7 +43,7 @@ public class CheckoutTest {
         int discountForDoubleBSkuInBasket = 15;
         int totalCheckoutValueForBasket = 2 * B_SKU_PRICE - discountForDoubleBSkuInBasket;
         int totalCheckoutValueForDiscountedMultipleTimesBasket = 7 * B_SKU_PRICE - 3 * discountForDoubleBSkuInBasket;
-        int totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus = 5 * D_SKU_PRICE + 5 * B_SKU_PRICE - 2 * discountForDoubleBSkuInBasket;
+        int totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus = 5 * B_SKU_PRICE + 5 * D_SKU_PRICE - 2 * discountForDoubleBSkuInBasket;
 
         assertThat(Checkout.checkout(skusWithDiscountForDoubleB), is(totalCheckoutValueForBasket));
         assertThat(Checkout.checkout(skusWithDiscountForDoubleBMultipleTimes),
