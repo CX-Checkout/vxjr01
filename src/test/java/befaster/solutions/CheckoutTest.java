@@ -15,4 +15,6 @@ public class CheckoutTest {
         assertThat(Checkout.checkout("D"), is(15));
     }
 
+
+
 }
