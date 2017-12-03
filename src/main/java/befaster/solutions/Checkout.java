@@ -57,7 +57,7 @@ public class Checkout {
     }
 
     private static boolean containsValidSkus(String skus) {
-        return skus.matches("^[ABCDE]*$");
+        return skus.matches("^[ABCDEF]*$");
     }
 
     private static Map<String, Integer> numberOfEachSkuInBasket(List<String> listOfSkusInBasket) {
