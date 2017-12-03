@@ -9,8 +9,8 @@ public class HelloTest {
 
     @Test
     public void should_return_hello_world() {
-        assertThat(Hello.hello("Robert"), is("Hello, World!"));
-        assertThat(Hello.hello("Mirek"), is("Hello, World!"));
+        assertThat(Hello.hello("Robert"), is("Hello, Robert!"));
+        assertThat(Hello.hello("Mirek"), is("Hello, Mirek!"));
     }
 
     @Test
