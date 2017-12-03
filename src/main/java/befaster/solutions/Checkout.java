@@ -22,14 +22,13 @@ public class Checkout {
 
     private static final Integer discountForDoubleB = 15;
 
-    public static Integer checkout(String skus) {
+    public Integer checkout(String skus) {
         List<String> listOfSkus = asList(skus.split(""));
         Integer numberOfBSkusInBasket = listOfSkus.stream()
                 .collect(groupingBy(Function.identity(), summingInt(e -> 1))).getOrDefault(B_SKU, 0);
 
-
         return (listOfSkus).stream()
                 .mapToInt((String sku) -> priceMap.get(sku))
-                .sum() - (numberOfBSkusInBasket > 2 ? discountForDoubleB : 0);
+                .sum() - (numberOfBSkusInBasket >= 2 ? discountForDoubleB : 0);
     }
 }
