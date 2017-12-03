@@ -36,7 +36,7 @@ public class CheckoutTest {
     }
 
     @Test
-    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_special_offers() {
+    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_double_B_SKU_in_basket() {
         String skusWithDiscountForDoubleB = "BB";
         String skusWithDiscountForDoubleBMultipleTimes = "BBBBBBB";
         String skusWithDiscountForDoubleBWithOtherSkus = "DBDBDBDBDB";
