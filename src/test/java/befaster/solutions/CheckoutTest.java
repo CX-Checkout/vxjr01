@@ -214,6 +214,28 @@ public class CheckoutTest {
     }
 
     @Test
+    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_double_V_and_each_triple_V_SKUs_in_basket() {
+        int discountForDoublesVSkuInBasket = 10;
+        int discountForTripleVSkuInBasket = 20;
+        String skusWithDiscountForDoubleV = "VV";
+        int totalCheckoutValueForBasket = 2 * V_SKU_PRICE - discountForDoublesVSkuInBasket;
+        String skusWithDiscountForTripleV = "VVV";
+        int totalCheckoutValueForTripleV = 3 * V_SKU_PRICE - discountForTripleVSkuInBasket;
+        String skusWithDiscountForTripleVMultipleTimes = "VVVVVVVVV";
+        int totalCheckoutValueForTripleVMultipleTimes = 9 * V_SKU_PRICE - 3 * discountForTripleVSkuInBasket;
+        String skusWithDiscountForTripleVAndDoubleV = "VVVVVVVVVVV";
+        int totalCheckoutValueForTripleVAndDoubleV = 11 * V_SKU_PRICE - 3 * discountForTripleVSkuInBasket - discountForDoublesVSkuInBasket;
+        String skusWithMixedDiscounts = "VDVDVDVDVDVD";
+        int totalCheckoutValueForMixedDiscounts = 6 * V_SKU_PRICE + 6 * D_SKU_PRICE - 2* discountForTripleVSkuInBasket;
+
+        assertThat(Checkout.checkout(skusWithDiscountForDoubleV), is(totalCheckoutValueForBasket));
+        assertThat(Checkout.checkout(skusWithDiscountForTripleV), is(totalCheckoutValueForTripleV));
+        assertThat(Checkout.checkout(skusWithDiscountForTripleVMultipleTimes), is(totalCheckoutValueForTripleVMultipleTimes));
+        assertThat(Checkout.checkout(skusWithDiscountForTripleVAndDoubleV), is(totalCheckoutValueForTripleVAndDoubleV));
+        assertThat(Checkout.checkout(skusWithMixedDiscounts), is(totalCheckoutValueForMixedDiscounts));
+    }
+
+    @Test
     public void should_return_sum_of_prices_for_given_skus_including_one_free_B_sku_for_each_double_E_in_basket() {
         int discountForDoubleBSkuInBasket = 15;
         String skusWithDoubleEAndSingleB = "EBE";
