@@ -13,12 +13,52 @@ public class CheckoutTest {
     private static final String D_SKU = "D";
     private static final String E_SKU = "E";
     private static final String F_SKU = "F";
+    private static final String G_SKU = "G";
+    private static final String H_SKU = "H";
+    private static final String I_SKU = "I";
+    private static final String J_SKU = "J";
+    private static final String K_SKU = "K";
+    private static final String L_SKU = "L";
+    private static final String M_SKU = "M";
+    private static final String N_SKU = "N";
+    private static final String O_SKU = "O";
+    private static final String P_SKU = "P";
+    private static final String Q_SKU = "Q";
+    private static final String R_SKU = "R";
+    private static final String S_SKU = "S";
+    private static final String T_SKU = "T";
+    private static final String U_SKU = "U";
+    private static final String V_SKU = "V";
+    private static final String W_SKU = "W";
+    private static final String X_SKU = "X";
+    private static final String Y_SKU = "Y";
+    private static final String Z_SKU = "Z";
     private static final int A_SKU_PRICE = 50;
     private static final int B_SKU_PRICE = 30;
     private static final int C_SKU_PRICE = 20;
     private static final int D_SKU_PRICE = 15;
     private static final int E_SKU_PRICE = 40;
     private static final int F_SKU_PRICE = 10;
+    private static final int G_SKU_PRICE = 20;
+    private static final int H_SKU_PRICE = 10;
+    private static final int I_SKU_PRICE = 35;
+    private static final int J_SKU_PRICE = 60;
+    private static final int K_SKU_PRICE = 80;
+    private static final int L_SKU_PRICE = 90;
+    private static final int M_SKU_PRICE = 15;
+    private static final int N_SKU_PRICE = 40;
+    private static final int O_SKU_PRICE = 10;
+    private static final int P_SKU_PRICE = 50;
+    private static final int Q_SKU_PRICE = 30;
+    private static final int R_SKU_PRICE = 50;
+    private static final int S_SKU_PRICE = 30;
+    private static final int T_SKU_PRICE = 20;
+    private static final int U_SKU_PRICE = 40;
+    private static final int V_SKU_PRICE = 50;
+    private static final int W_SKU_PRICE = 20;
+    private static final int X_SKU_PRICE = 90;
+    private static final int Y_SKU_PRICE = 10;
+    private static final int Z_SKU_PRICE = 50;
 
     @Test
     public void should_return_price_of_each_sku_when_only_one_item_is_in_basket() {
@@ -28,6 +68,26 @@ public class CheckoutTest {
         assertThat(Checkout.checkout(D_SKU), is(D_SKU_PRICE));
         assertThat(Checkout.checkout(E_SKU), is(E_SKU_PRICE));
         assertThat(Checkout.checkout(F_SKU), is(F_SKU_PRICE));
+        assertThat(Checkout.checkout(G_SKU), is(G_SKU_PRICE));
+        assertThat(Checkout.checkout(H_SKU), is(H_SKU_PRICE));
+        assertThat(Checkout.checkout(I_SKU), is(I_SKU_PRICE));
+        assertThat(Checkout.checkout(J_SKU), is(J_SKU_PRICE));
+        assertThat(Checkout.checkout(K_SKU), is(K_SKU_PRICE));
+        assertThat(Checkout.checkout(L_SKU), is(L_SKU_PRICE));
+        assertThat(Checkout.checkout(M_SKU), is(M_SKU_PRICE));
+        assertThat(Checkout.checkout(N_SKU), is(N_SKU_PRICE));
+        assertThat(Checkout.checkout(O_SKU), is(O_SKU_PRICE));
+        assertThat(Checkout.checkout(P_SKU), is(P_SKU_PRICE));
+        assertThat(Checkout.checkout(Q_SKU), is(Q_SKU_PRICE));
+        assertThat(Checkout.checkout(R_SKU), is(R_SKU_PRICE));
+        assertThat(Checkout.checkout(S_SKU), is(S_SKU_PRICE));
+        assertThat(Checkout.checkout(T_SKU), is(T_SKU_PRICE));
+        assertThat(Checkout.checkout(U_SKU), is(U_SKU_PRICE));
+        assertThat(Checkout.checkout(V_SKU), is(V_SKU_PRICE));
+        assertThat(Checkout.checkout(W_SKU), is(W_SKU_PRICE));
+        assertThat(Checkout.checkout(X_SKU), is(X_SKU_PRICE));
+        assertThat(Checkout.checkout(Y_SKU), is(Y_SKU_PRICE));
+        assertThat(Checkout.checkout(Z_SKU), is(Z_SKU_PRICE));
     }
 
     @Test
