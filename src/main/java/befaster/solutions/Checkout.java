@@ -69,6 +69,7 @@ public class Checkout {
     private static final int discountForFiveHs = 5;
     private static final int discountForTenHs = 20;
     private static final int discountForDoubleK = 10;
+    private static final int discountForFivePs = 50;
 
     public static Integer checkout(String skus) {
         if (!containsValidSkus(skus)) {
@@ -90,6 +91,7 @@ public class Checkout {
         int numberOfKSkus = numberOfSkusInBasket.numberOfSkus(K_SKU);
         int numberOfMSkus = numberOfSkusInBasket.numberOfSkus(M_SKU);
         int numberOfNSkus = numberOfSkusInBasket.numberOfSkus(N_SKU);
+        int numberOfPSkus = numberOfSkusInBasket.numberOfSkus(P_SKU);
 
         DiscountForMultipleSkus discountForEachFiveAs = new DiscountForMultipleSkus(numberOfASkus, 5, discountForFiveAs);
         DiscountForMultipleSkus discountForEachTripleA = new DiscountForMultipleSkus(
@@ -105,6 +107,7 @@ public class Checkout {
                 numberOfBSkus - freeBForEachTwoEs.numberOfDiscountedSkus(), 2, discountForDoubleB);
 
         DiscountForMultipleSkus discountForEachDoubleK = new DiscountForMultipleSkus(numberOfKSkus, 2, discountForDoubleK);
+        DiscountForMultipleSkus discountForEachFivePs = new DiscountForMultipleSkus(numberOfPSkus, 2, discountForFivePs);
 
         FreeSkuForNumberOfAnotherSkus freeMForEachTripleN = new FreeSkuForNumberOfAnotherSkus(numberOfMSkus,
                 numberOfNSkus, 3, priceMap.get(M_SKU));
@@ -117,7 +120,8 @@ public class Checkout {
             freeBForEachTwoEs.discount() + discountForEachDoubleB.discount() +
             discountForEachDoubleK.discount() +
             freeFForEachTripleF.discount() +
-            freeMForEachTripleN.discount();
+            freeMForEachTripleN.discount() +
+            discountForEachFivePs.discount();
     }
 
     private static boolean containsValidSkus(String skus) {
