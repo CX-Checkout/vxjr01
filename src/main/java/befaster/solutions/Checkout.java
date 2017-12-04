@@ -53,14 +53,14 @@ public class Checkout {
         put(P_SKU, 50);
         put(Q_SKU, 30);
         put(R_SKU, 50);
-        put(S_SKU, 30);
+        put(S_SKU, 20);
         put(T_SKU, 20);
         put(U_SKU, 40);
         put(V_SKU, 50);
         put(W_SKU, 20);
-        put(X_SKU, 90);
-        put(Y_SKU, 10);
-        put(Z_SKU, 50);
+        put(X_SKU, 17);
+        put(Y_SKU, 20);
+        put(Z_SKU, 21);
     }};
 
     private static final int discountForDoubleB = 15;
