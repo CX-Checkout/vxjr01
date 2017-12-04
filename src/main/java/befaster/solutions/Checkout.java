@@ -38,12 +38,12 @@ public class Checkout {
 
         List<String> listOfSkusInBasket = skus.isEmpty() ? emptyList() : asList(skus.split(""));
 
-        Map<String, Integer> numberOfSkusInBasket = numberOfEachSkuInBasket(listOfSkusInBasket);
-        DiscountForMultipleSkus discountForEachFiveAs = new DiscountForMultipleSkus(numberOfSkusInBasket.getOrDefault(A_SKU, 0), 5, discountForFiveAs);
-        DiscountForMultipleSkus discountForEachTripleA = new DiscountForMultipleSkus(numberOfSkusInBasket.getOrDefault(A_SKU, 0) - discountForEachFiveAs.numberOfDiscountedSkus(), 3, discountForTripleA);
-        FreeSkuForNumberOfAnotherSkus freeBForEachTwoEs = new FreeSkuForNumberOfAnotherSkus(numberOfSkusInBasket.getOrDefault(B_SKU, 0), numberOfSkusInBasket.getOrDefault(E_SKU, 0), 2, priceMap.get(B_SKU));
-        DiscountForMultipleSkus discountForEachDoubleB = new DiscountForMultipleSkus(numberOfSkusInBasket.getOrDefault(B_SKU, 0) - freeBForEachTwoEs.numberOfDiscountedSkus(), 2, discountForDoubleB);
-        DiscountForMultipleSkus freeFForEachTripleF = new DiscountForMultipleSkus(numberOfSkusInBasket.getOrDefault(F_SKU, 0), 3, priceMap.get(F_SKU));
+        NumberOfEachSku numberOfSkusInBasket = new NumberOfEachSku(listOfSkusInBasket);
+        DiscountForMultipleSkus discountForEachFiveAs = new DiscountForMultipleSkus(numberOfSkusInBasket.numberOfSkus(A_SKU), 5, discountForFiveAs);
+        DiscountForMultipleSkus discountForEachTripleA = new DiscountForMultipleSkus(numberOfSkusInBasket.numberOfSkus(A_SKU) - discountForEachFiveAs.numberOfDiscountedSkus(), 3, discountForTripleA);
+        FreeSkuForNumberOfAnotherSkus freeBForEachTwoEs = new FreeSkuForNumberOfAnotherSkus(numberOfSkusInBasket.numberOfSkus(B_SKU), numberOfSkusInBasket.numberOfSkus(E_SKU), 2, priceMap.get(B_SKU));
+        DiscountForMultipleSkus discountForEachDoubleB = new DiscountForMultipleSkus(numberOfSkusInBasket.numberOfSkus(B_SKU) - freeBForEachTwoEs.numberOfDiscountedSkus(), 2, discountForDoubleB);
+        DiscountForMultipleSkus freeFForEachTripleF = new DiscountForMultipleSkus(numberOfSkusInBasket.numberOfSkus(F_SKU), 3, priceMap.get(F_SKU));
         int discounts = discountForEachFiveAs.discount() + discountForEachTripleA.discount() +
                 freeBForEachTwoEs.discount() + discountForEachDoubleB.discount() + freeFForEachTripleF.discount();
 
@@ -54,8 +54,17 @@ public class Checkout {
         return skus.matches("^[ABCDEF]*$");
     }
 
-    private static Map<String, Integer> numberOfEachSkuInBasket(List<String> listOfSkusInBasket) {
-        return listOfSkusInBasket.stream().collect(groupingBy(Function.identity(), summingInt(e -> 1)));
+
+    private static final class NumberOfEachSku {
+        private final Map<String, Integer> numberOfEachSku;
+
+        public NumberOfEachSku(List<String> listOfSkus) {
+            this.numberOfEachSku = listOfSkus.stream().collect(groupingBy(Function.identity(), summingInt(e -> 1)));
+        }
+
+        public int numberOfSkus(String sku) {
+            return numberOfEachSku.getOrDefault(sku, 0);
+        }
     }
 
     private static final class DiscountForMultipleSkus {
