@@ -54,7 +54,7 @@ public class Checkout {
     }
 
     private static Integer numberOfSkusDiscountedForFiveASkus(Integer numberOfASkusInBasket) {
-        return (numberOfASkusInBasket / 5) * 5;
+        return numberOfASkusInBasket - (numberOfASkusInBasket % 5);
     }
 
     private static boolean containsValidSkus(String skus) {
@@ -65,12 +65,12 @@ public class Checkout {
         return listOfSkusInBasket.stream().collect(groupingBy(Function.identity(), summingInt(e -> 1)));
     }
 
-    private static Integer freeOneFForEachThreeFsInBasket(Integer numberOfFSkusInBasket) {
-        return new DiscountForMultipleSkus(numberOfFSkusInBasket, 3, priceMap.get(F_SKU)).discount();
-    }
-
     private static int freeOneBForEachDoubleE(Integer numberOfBSkusInBasket, Integer numberOfESkusInBasket) {
         return Math.min(numberOfESkusInBasket / 2, numberOfBSkusInBasket) * priceMap.get(B_SKU);
+    }
+
+    private static Integer freeOneFForEachThreeFsInBasket(Integer numberOfFSkusInBasket) {
+        return new DiscountForMultipleSkus(numberOfFSkusInBasket, 3, priceMap.get(F_SKU)).discount();
     }
 
     private static int discountForEachDoubleBSkuInBasket(Integer numberOfBSkusInBasket) {
