@@ -71,6 +71,8 @@ public class Checkout {
     private static final int discountForDoubleK = 10;
     private static final int discountForFivePs = 50;
     private static final int discountForTripleQ = 10;
+    private static final int discountForDoubleV = 10;
+    private static final int discountForTripleV = 20;
 
     public static Integer checkout(String skus) {
         if (!containsValidSkus(skus)) {
@@ -96,6 +98,7 @@ public class Checkout {
         int numberOfQSkus = numberOfSkusInBasket.numberOfSkus(Q_SKU);
         int numberOfRSkus = numberOfSkusInBasket.numberOfSkus(R_SKU);
         int numberOfUSkus = numberOfSkusInBasket.numberOfSkus(U_SKU);
+        int numberOfVSkus = numberOfSkusInBasket.numberOfSkus(V_SKU);
 
         DiscountForMultipleSkus discountForEachFiveAs = new DiscountForMultipleSkus(numberOfASkus, 5, discountForFiveAs);
         DiscountForMultipleSkus discountForEachTripleA = new DiscountForMultipleSkus(
@@ -104,6 +107,10 @@ public class Checkout {
         DiscountForMultipleSkus discountForEachTenHs = new DiscountForMultipleSkus(numberOfHSkus, 10, discountForTenHs);
         DiscountForMultipleSkus discountForEachFiveHs = new DiscountForMultipleSkus(
                 numberOfHSkus - discountForEachTenHs.numberOfDiscountedSkus(), 5, discountForFiveHs);
+
+        DiscountForMultipleSkus discountForEachTripleV = new DiscountForMultipleSkus(numberOfVSkus, 3, discountForTripleV);
+        DiscountForMultipleSkus discountForEachDoubleV = new DiscountForMultipleSkus(
+                numberOfVSkus - discountForEachTripleV.numberOfDiscountedSkus(), 2, discountForDoubleV);
 
         FreeSkuForNumberOfAnotherSkus freeBForEachTwoEs = new FreeSkuForNumberOfAnotherSkus(numberOfBSkus,
                 numberOfESkus, 2, priceMap.get(B_SKU));
@@ -133,7 +140,8 @@ public class Checkout {
             freeMForEachTripleN.discount() +
             discountForEachFivePs.discount() +
             freeQForEachTripleR.discount() + discountForEachTripleQ.discount() +
-            freeUForEachFourU.discount();
+            freeUForEachFourU.discount() +
+            discountForEachTripleV.discount() + discountForEachDoubleV.discount();
     }
 
     private static boolean containsValidSkus(String skus) {
