@@ -4,7 +4,9 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -312,9 +314,15 @@ public class CheckoutTest {
     @Test
     public void should_return_sum_of_prices_for_given_skus_including_group_discount_for_S_T_X_Y_Z() {
         List<String> skusWitoutDiscount = asList("ST", "XY", "SZ", "TY");
+        Map<String, Integer> skusWithoutDiscountTotalCheckouts = new HashMap<String, Integer>() {{
+            put("ST", S_SKU_PRICE + T_SKU_PRICE);
+            put("XY", X_SKU_PRICE + Y_SKU_PRICE);
+            put("SZ", S_SKU_PRICE + Z_SKU_PRICE);
+            put("TY", T_SKU_PRICE + Y_SKU_PRICE);
+        }};
 
         skusWitoutDiscount.forEach(
-                skusStringWithoutDiscount -> assertThat(Checkout.checkout(skusStringWithoutDiscount), is(0))
+                skusStringWithoutDiscount -> assertThat(Checkout.checkout(skusStringWithoutDiscount), is(skusWithoutDiscountTotalCheckouts.get(skusStringWithoutDiscount)))
         );
 
     }
