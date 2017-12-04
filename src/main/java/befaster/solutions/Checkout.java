@@ -78,11 +78,11 @@ public class Checkout {
     }
 
     private static int discountForEachTripleASkuInBasket(Integer numberOfASkusInBasket) {
-        return (numberOfASkusInBasket / 3) * discountForTripleA;
+        return new DiscountForMultipleSkus(numberOfASkusInBasket, 3, discountForTripleA).discount();
     }
 
     private static int discountForEachFiveASkuInBasket(Integer numberOfASkusInBasket) {
-        return (numberOfASkusInBasket / 5) * discountForFiveAs;
+        return new DiscountForMultipleSkus(numberOfASkusInBasket, 5, discountForFiveAs).discount();
     }
 
     public static final class DiscountForMultipleSkus {
