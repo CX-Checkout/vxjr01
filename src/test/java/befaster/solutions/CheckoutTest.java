@@ -275,6 +275,17 @@ public class CheckoutTest {
     }
 
     @Test
+    public void should_return_sum_of_prices_for_given_skus_including_one_free_F_for_each_3_F_SKUs_in_basket() {
+        String skusWithThreeFs = "FFF";
+        int totalCheckoutValueForThreeFs = 2 * F_SKU_PRICE;
+        String skusWithSixFs = "FFFFFF";
+        int totalCheckoutValueForSixFs = 4 * F_SKU_PRICE;
+
+        assertThat(Checkout.checkout(skusWithThreeFs), is(totalCheckoutValueForThreeFs));
+        assertThat(Checkout.checkout(skusWithSixFs), is(totalCheckoutValueForSixFs));
+    }
+
+    @Test
     public void should_return_minus_one_for_skus_containing_illegal_elements() {
         String invalidSku = "!";
         String skusWithInvalidItem = "A!CD";
