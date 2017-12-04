@@ -99,7 +99,7 @@ public class Checkout {
     }
 
     private static boolean containsValidSkus(String skus) {
-        return skus.matches("^[ABCDEFGHIJKLMNOUPQRSTUWXYZ]*$");
+        return skus.matches("^[ABCDEFGHIJKLMNOUPQRSTUVWXYZ]*$");
     }
 
 }

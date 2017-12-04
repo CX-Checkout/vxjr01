@@ -171,8 +171,8 @@ public class CheckoutTest {
 
     @Test
     public void should_return_minus_one_for_skus_containing_illegal_elements() {
-        String invalidSku = "V";
-        String skusWithInvalidItem = "AVCD";
+        String invalidSku = "!";
+        String skusWithInvalidItem = "A!CD";
         String noSkusWithSpaces = " ";
 
         assertThat(Checkout.checkout(invalidSku), is(-1));
