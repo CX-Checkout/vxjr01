@@ -131,21 +131,22 @@ public class Checkout {
         DiscountForMultipleSkus freeFForEachTripleF = new DiscountForMultipleSkus(numberOfFSkus, 3, priceMap.get(F_SKU));
         DiscountForMultipleSkus freeUForEachFourU = new DiscountForMultipleSkus(numberOfUSkus, 4, priceMap.get(U_SKU));
 
-        int groupDiscount = 45;
+        int discountForGroup = 45;
         int numberOfSkusFromGroupEligibleForDiscount = 3;
         int numberOfAllSkusFromGroup = numberOfSkusInBasket.numberOfSkus(S_SKU) +
                 numberOfSkusInBasket.numberOfSkus(T_SKU) +
                 numberOfSkusInBasket.numberOfSkus(X_SKU) +
                 numberOfSkusInBasket.numberOfSkus(Y_SKU) +
                 numberOfSkusInBasket.numberOfSkus(Z_SKU);
+        int totalGroupDiscount = 0;
         if ((numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount) > 0) {
-            listOfSkus.stream()
+            totalGroupDiscount = listOfSkus.stream()
                     .filter((sku) -> sku.matches("^[STXYZ]$"))
                     .limit(((long)(numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount)) * numberOfSkusFromGroupEligibleForDiscount)
                     .mapToInt(priceMap::get)
-                    .sum();
+                    .sum() -
+                    (numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount) * discountForGroup;
         }
-        int totalGroupDiscount = (numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount) * groupDiscount;
 
         return
             discountForEachFiveAs.discount() + discountForEachTripleA.discount() +
@@ -157,7 +158,7 @@ public class Checkout {
             discountForEachFivePs.discount() +
             freeQForEachTripleR.discount() + discountForEachTripleQ.discount() +
             freeUForEachFourU.discount() +
-            discountForEachTripleV.discount() + discountForEachDoubleV.discount();
+            discountForEachTripleV.discount() + discountForEachDoubleV.discount() + totalGroupDiscount;
     }
 
     private static boolean containsValidSkus(String skus) {
