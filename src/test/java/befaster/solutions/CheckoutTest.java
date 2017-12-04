@@ -151,7 +151,7 @@ public class CheckoutTest {
         String skusWithDiscountForTenHsMultipleTimes = "HHHHHHHHHHHHHHHHHHHH";
         int totalCheckoutValueForTenHsMultipleTimes = 20 * H_SKU_PRICE - 2 * discountForTenHsSkuInBasket;
         String skusWithDiscountForTenHsAndFiveHs = "HHHHHHHHHHHHHHHHHHHHHHHHH";
-        int totalCheckoutValueForTenHsAndFiveHs = 15 * H_SKU_PRICE - 2 * discountForTenHsSkuInBasket - discountForFiveHsSkuInBasket;
+        int totalCheckoutValueForTenHsAndFiveHs = 25 * H_SKU_PRICE - 2 * discountForTenHsSkuInBasket - discountForFiveHsSkuInBasket;
         String skusWithMixedDiscounts = "HDHDHDHDHDHD";
         int totalCheckoutValueForMixedDiscounts = 6 * H_SKU_PRICE + 6 * D_SKU_PRICE - discountForFiveHsSkuInBasket;
 
