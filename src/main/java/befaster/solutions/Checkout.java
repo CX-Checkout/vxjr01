@@ -133,10 +133,12 @@ public class Checkout {
 
         int groupDiscount = 45;
         int numberOfSkusFromGroupEligibleForDiscount = 3;
-        int numberOfAllSkusFromGroup = numberOfSkusInBasket.numberOfSkus(S_SKU) + numberOfSkusInBasket.numberOfSkus(
-                T_SKU) + numberOfSkusInBasket.numberOfSkus(X_SKU) + numberOfSkusInBasket.numberOfSkus(
-                Y_SKU) + numberOfSkusInBasket.numberOfSkus(Z_SKU);
-        if (numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount > 0) {
+        int numberOfAllSkusFromGroup = numberOfSkusInBasket.numberOfSkus(S_SKU) +
+                numberOfSkusInBasket.numberOfSkus(T_SKU) +
+                numberOfSkusInBasket.numberOfSkus(X_SKU) +
+                numberOfSkusInBasket.numberOfSkus(Y_SKU) +
+                numberOfSkusInBasket.numberOfSkus(Z_SKU);
+        if ((numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount) > 0) {
             listOfSkus.stream()
                     .filter((sku) -> sku.matches("^[STXYZ]$"))
                     .limit(((long)(numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount)) * numberOfSkusFromGroupEligibleForDiscount)
