@@ -119,6 +119,23 @@ public class CheckoutTest {
     }
 
     @Test
+    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_triple_Q_SKU_in_basket() {
+        int discountForTripleKSkuInBasket = 10;
+        String skusWithDiscountForTripleQ = "QQQ";
+        int totalCheckoutValueForBasket = 3 * Q_SKU_PRICE - discountForTripleKSkuInBasket;
+        String skusWithDiscountForTripleQMultipleTimes = "QQQQQQQQQ";
+        int totalCheckoutValueForDiscountedMultipleTimesBasket = 9 * B_SKU_PRICE - 3 * discountForTripleKSkuInBasket;
+        String skusWithDiscountForTripleQWithOtherSkus = "QDQDQDQDQDQDQD";
+        int totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus = 6 * Q_SKU_PRICE + 6 * D_SKU_PRICE - 2 * discountForTripleKSkuInBasket;
+
+        assertThat(Checkout.checkout(skusWithDiscountForTripleQ), is(totalCheckoutValueForBasket));
+        assertThat(Checkout.checkout(skusWithDiscountForTripleQMultipleTimes),
+                is(totalCheckoutValueForDiscountedMultipleTimesBasket));
+        assertThat(Checkout.checkout(skusWithDiscountForTripleQWithOtherSkus),
+                is(totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus));
+    }
+
+    @Test
     public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_double_K_SKU_in_basket() {
         int discountForDoubleKSkuInBasket = 10;
         String skusWithDiscountForDoubleK = "KK";
