@@ -49,10 +49,6 @@ public class Checkout {
         return listOfSkusInBasket.stream().mapToInt(priceMap::get).sum() - discounts;
     }
 
-    private static Integer freeOneFForEachThreeFsInBasket(Integer numberOfFSkusInBasket) {
-        return (numberOfFSkusInBasket / 3) * priceMap.get(F_SKU);
-    }
-
     private static Integer numberOfFreeBSkusForEachDoubleE(Integer numberOfBSkusInBasket, Integer numberOfESkusInBasket) {
         return Math.min(numberOfESkusInBasket / 2, numberOfBSkusInBasket);
     }
@@ -67,6 +63,10 @@ public class Checkout {
 
     private static Map<String, Integer> numberOfEachSkuInBasket(List<String> listOfSkusInBasket) {
         return listOfSkusInBasket.stream().collect(groupingBy(Function.identity(), summingInt(e -> 1)));
+    }
+
+    private static Integer freeOneFForEachThreeFsInBasket(Integer numberOfFSkusInBasket) {
+        return new DiscountForMultipleSkus(numberOfFSkusInBasket, 3, priceMap.get(F_SKU)).discount();
     }
 
     private static int freeOneBForEachDoubleE(Integer numberOfBSkusInBasket, Integer numberOfESkusInBasket) {
