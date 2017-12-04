@@ -107,7 +107,7 @@ public class Checkout {
                 numberOfBSkus - freeBForEachTwoEs.numberOfDiscountedSkus(), 2, discountForDoubleB);
 
         DiscountForMultipleSkus discountForEachDoubleK = new DiscountForMultipleSkus(numberOfKSkus, 2, discountForDoubleK);
-        DiscountForMultipleSkus discountForEachFivePs = new DiscountForMultipleSkus(numberOfPSkus, 2, discountForFivePs);
+        DiscountForMultipleSkus discountForEachFivePs = new DiscountForMultipleSkus(numberOfPSkus, 5, discountForFivePs);
 
         FreeSkuForNumberOfAnotherSkus freeMForEachTripleN = new FreeSkuForNumberOfAnotherSkus(numberOfMSkus,
                 numberOfNSkus, 3, priceMap.get(M_SKU));
