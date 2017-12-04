@@ -43,7 +43,7 @@ public class CheckoutTest {
     private static final int H_SKU_PRICE = 10;
     private static final int I_SKU_PRICE = 35;
     private static final int J_SKU_PRICE = 60;
-    private static final int K_SKU_PRICE = 80;
+    private static final int K_SKU_PRICE = 70;
     private static final int L_SKU_PRICE = 90;
     private static final int M_SKU_PRICE = 15;
     private static final int N_SKU_PRICE = 40;
@@ -51,14 +51,14 @@ public class CheckoutTest {
     private static final int P_SKU_PRICE = 50;
     private static final int Q_SKU_PRICE = 30;
     private static final int R_SKU_PRICE = 50;
-    private static final int S_SKU_PRICE = 30;
+    private static final int S_SKU_PRICE = 20;
     private static final int T_SKU_PRICE = 20;
     private static final int U_SKU_PRICE = 40;
     private static final int V_SKU_PRICE = 50;
     private static final int W_SKU_PRICE = 20;
-    private static final int X_SKU_PRICE = 90;
-    private static final int Y_SKU_PRICE = 10;
-    private static final int Z_SKU_PRICE = 50;
+    private static final int X_SKU_PRICE = 17;
+    private static final int Y_SKU_PRICE = 20;
+    private static final int Z_SKU_PRICE = 21;
 
     @Test
     public void should_return_price_of_each_sku_when_only_one_item_is_in_basket() {
