@@ -1,7 +1,10 @@
 package befaster.solutions;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+
+import java.util.List;
 
 import org.junit.Test;
 
@@ -305,6 +308,15 @@ public class CheckoutTest {
 
         assertThat(Checkout.checkout(skusWithFourUs), is(totalCheckoutValueForFourUs));
         assertThat(Checkout.checkout(skusWithEightFs), is(totalCheckoutValueForEightFs));
+    }
+    @Test
+    public void should_return_sum_of_prices_for_given_skus_including_group_discount_for_S_T_X_Y_Z() {
+        List<String> skusWitoutDiscount = asList("ST", "XY", "SZ", "TY");
+
+        skusWitoutDiscount.forEach(
+                skusStringWithoutDiscount -> assertThat(Checkout.checkout(skusStringWithoutDiscount), is(0))
+        );
+
     }
 
     @Test
