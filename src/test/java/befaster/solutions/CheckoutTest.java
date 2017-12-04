@@ -275,14 +275,14 @@ public class CheckoutTest {
     }
 
     @Test
-    public void should_return_sum_of_prices_for_given_skus_including_one_free_F_for_each_3_F_SKUs_in_basket() {
-        String skusWithThreeFs = "FFF";
-        int totalCheckoutValueForThreeFs = 2 * F_SKU_PRICE;
-        String skusWithSixFs = "FFFFFF";
-        int totalCheckoutValueForSixFs = 4 * F_SKU_PRICE;
+    public void should_return_sum_of_prices_for_given_skus_including_one_free_U_for_each_4_U_SKUs_in_basket() {
+        String skusWithFourUs = "UUUU";
+        int totalCheckoutValueForFourUs = 3 * U_SKU_PRICE;
+        String skusWithEightFs = "UUUUUUUU";
+        int totalCheckoutValueForEightFs = 6 * U_SKU_PRICE;
 
-        assertThat(Checkout.checkout(skusWithThreeFs), is(totalCheckoutValueForThreeFs));
-        assertThat(Checkout.checkout(skusWithSixFs), is(totalCheckoutValueForSixFs));
+        assertThat(Checkout.checkout(skusWithFourUs), is(totalCheckoutValueForFourUs));
+        assertThat(Checkout.checkout(skusWithEightFs), is(totalCheckoutValueForEightFs));
     }
 
     @Test
