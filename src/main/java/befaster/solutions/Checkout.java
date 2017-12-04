@@ -42,13 +42,20 @@ public class Checkout {
         int numberOfASkus = numberOfSkusInBasket.numberOfSkus(A_SKU);
         int numberOfBSkus = numberOfSkusInBasket.numberOfSkus(B_SKU);
         int numberOfFSkus = numberOfSkusInBasket.numberOfSkus(F_SKU);
+
         DiscountForMultipleSkus discountForEachFiveAs = new DiscountForMultipleSkus(numberOfASkus, 5, discountForFiveAs);
-        DiscountForMultipleSkus discountForEachTripleA = new DiscountForMultipleSkus(numberOfASkus - discountForEachFiveAs.numberOfDiscountedSkus(), 3, discountForTripleA);
-        FreeSkuForNumberOfAnotherSkus freeBForEachTwoEs = new FreeSkuForNumberOfAnotherSkus(numberOfBSkus, numberOfSkusInBasket.numberOfSkus(E_SKU), 2, priceMap.get(B_SKU));
-        DiscountForMultipleSkus discountForEachDoubleB = new DiscountForMultipleSkus(numberOfBSkus - freeBForEachTwoEs.numberOfDiscountedSkus(), 2, discountForDoubleB);
+        DiscountForMultipleSkus discountForEachTripleA = new DiscountForMultipleSkus(
+                numberOfASkus - discountForEachFiveAs.numberOfDiscountedSkus(), 3, discountForTripleA);
+
+        FreeSkuForNumberOfAnotherSkus freeBForEachTwoEs = new FreeSkuForNumberOfAnotherSkus(numberOfBSkus,
+                numberOfSkusInBasket.numberOfSkus(E_SKU), 2, priceMap.get(B_SKU));
+        DiscountForMultipleSkus discountForEachDoubleB = new DiscountForMultipleSkus(
+                numberOfBSkus - freeBForEachTwoEs.numberOfDiscountedSkus(), 2, discountForDoubleB);
+
         DiscountForMultipleSkus freeFForEachTripleF = new DiscountForMultipleSkus(numberOfFSkus, 3, priceMap.get(F_SKU));
-        return discountForEachFiveAs.discount() + discountForEachTripleA.discount() +
-                freeBForEachTwoEs.discount() + discountForEachDoubleB.discount() + freeFForEachTripleF.discount();
+
+        return discountForEachFiveAs.discount() + discountForEachTripleA.discount() + freeBForEachTwoEs.discount() + discountForEachDoubleB
+                .discount() + freeFForEachTripleF.discount();
     }
 
     private static boolean containsValidSkus(String skus) {
