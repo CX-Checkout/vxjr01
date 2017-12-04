@@ -54,7 +54,7 @@ public class Checkout {
     }
 
     private static Integer numberOfSkusDiscountedForFiveASkus(Integer numberOfASkusInBasket) {
-        return numberOfASkusInBasket - (numberOfASkusInBasket % 5);
+        return (numberOfASkusInBasket / 5) * 5;
     }
 
     private static boolean containsValidSkus(String skus) {
@@ -66,7 +66,7 @@ public class Checkout {
     }
 
     private static int freeOneBForEachDoubleE(Integer numberOfBSkusInBasket, Integer numberOfESkusInBasket) {
-        return Math.min(numberOfESkusInBasket / 2, numberOfBSkusInBasket) * priceMap.get(B_SKU);
+        return new FreeSkuForNumberOfAnotherSkus(numberOfBSkusInBasket, numberOfESkusInBasket, 2, priceMap.get(B_SKU)).discount();
     }
 
     private static Integer freeOneFForEachThreeFsInBasket(Integer numberOfFSkusInBasket) {
@@ -98,6 +98,24 @@ public class Checkout {
 
         public int discount() {
             return (numberOfSkus / numberOfSkusTriggeringDiscount) * discountAmount;
+        }
+    }
+
+    public static final class FreeSkuForNumberOfAnotherSkus {
+        private final int numberOfSkusEligibleForDiscount;
+        private final int numberOfAnotherSkus;
+        private final int numberOfAnotherSkusTriggeringDiscount;
+        private final int discountAmount;
+
+        public FreeSkuForNumberOfAnotherSkus(int numberOfSkusEligibleForDiscount, int numberOfAnotherSkus, int numberOfAnotherSkusTriggeringDiscount, int discountAmount) {
+            this.numberOfSkusEligibleForDiscount = numberOfSkusEligibleForDiscount;
+            this.numberOfAnotherSkus = numberOfAnotherSkus;
+            this.numberOfAnotherSkusTriggeringDiscount = numberOfAnotherSkusTriggeringDiscount;
+            this.discountAmount = discountAmount;
+        }
+
+        public int discount() {
+            return Math.min(numberOfAnotherSkus / numberOfAnotherSkusTriggeringDiscount, numberOfSkusEligibleForDiscount) * discountAmount;
         }
     }
 }
