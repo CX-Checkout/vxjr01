@@ -131,6 +131,22 @@ public class Checkout {
         DiscountForMultipleSkus freeFForEachTripleF = new DiscountForMultipleSkus(numberOfFSkus, 3, priceMap.get(F_SKU));
         DiscountForMultipleSkus freeUForEachFourU = new DiscountForMultipleSkus(numberOfUSkus, 4, priceMap.get(U_SKU));
 
+        int totalGroupDiscount = groupDiscountForSTXYZSkus(listOfSkus, numberOfSkusInBasket);
+
+        return
+            discountForEachFiveAs.discount() + discountForEachTripleA.discount() +
+            discountForEachTenHs.discount() + discountForEachFiveHs.discount() +
+            freeBForEachTwoEs.discount() + discountForEachDoubleB.discount() +
+            discountForEachDoubleK.discount() +
+            freeFForEachTripleF.discount() +
+            freeMForEachTripleN.discount() +
+            discountForEachFivePs.discount() +
+            freeQForEachTripleR.discount() + discountForEachTripleQ.discount() +
+            freeUForEachFourU.discount() +
+            discountForEachTripleV.discount() + discountForEachDoubleV.discount() + totalGroupDiscount;
+    }
+
+    private static int groupDiscountForSTXYZSkus(List<String> listOfSkus, NumberOfEachSku numberOfSkusInBasket) {
         int discountForGroup = 45;
         int numberOfSkusFromGroupEligibleForDiscount = 3;
         int numberOfAllSkusFromGroup = numberOfSkusInBasket.numberOfSkus(S_SKU) +
@@ -147,18 +163,7 @@ public class Checkout {
                     .sum() -
                     (numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount) * discountForGroup;
         }
-
-        return
-            discountForEachFiveAs.discount() + discountForEachTripleA.discount() +
-            discountForEachTenHs.discount() + discountForEachFiveHs.discount() +
-            freeBForEachTwoEs.discount() + discountForEachDoubleB.discount() +
-            discountForEachDoubleK.discount() +
-            freeFForEachTripleF.discount() +
-            freeMForEachTripleN.discount() +
-            discountForEachFivePs.discount() +
-            freeQForEachTripleR.discount() + discountForEachTripleQ.discount() +
-            freeUForEachFourU.discount() +
-            discountForEachTripleV.discount() + discountForEachDoubleV.discount() + totalGroupDiscount;
+        return totalGroupDiscount;
     }
 
     private static boolean containsValidSkus(String skus) {
