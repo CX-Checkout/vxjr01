@@ -313,7 +313,7 @@ public class CheckoutTest {
     }
 
     @Test
-    public void should_return_sum_of_prices_for_given_skus_do_not_including_group_discount_for_S_T_X_Y_Z_when_basket_does_not_contain_at_least_3_skus_from_group() {
+    public void should_return_sum_of_prices_for_given_skus_do_not_including_group_discount_for_S_T_X_Y_Z_when_basket_does_not_contain_at_least_three_skus_from_group() {
         List<String> skusWitoutDiscount = asList("ST", "XY", "SZ", "TY");
         Map<String, Integer> skusWithoutDiscountTotalCheckouts = new HashMap<String, Integer>() {{
             put("ST", S_SKU_PRICE + T_SKU_PRICE);
@@ -329,7 +329,7 @@ public class CheckoutTest {
     }
 
     @Test
-    public void should_return_sum_of_prices_for_given_skus_including_group_discount_for_S_T_X_Y_Z_when_basket_contains_at_least_3_skus_from_group() {
+    public void should_return_sum_of_prices_for_given_skus_including_group_discount_for_S_T_X_Y_Z_when_basket_contains_at_least_three_skus_from_group() {
         int totalPriceForEachThreeSkusFromGroup = 45;
         List<String> skusWitoutDiscount = asList("STY", "ZXY", "XSZ", "TYZ", "SYZ");
 

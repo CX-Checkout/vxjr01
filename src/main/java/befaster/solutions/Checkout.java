@@ -131,6 +131,17 @@ public class Checkout {
         DiscountForMultipleSkus freeFForEachTripleF = new DiscountForMultipleSkus(numberOfFSkus, 3, priceMap.get(F_SKU));
         DiscountForMultipleSkus freeUForEachFourU = new DiscountForMultipleSkus(numberOfUSkus, 4, priceMap.get(U_SKU));
 
+        int numberOfSkusFromGroupEligibleForDiscount = 3
+        if ((numberOfSkusInBasket.numberOfSkus(S_SKU) +
+        numberOfSkusInBasket.numberOfSkus(T_SKU) +
+        numberOfSkusInBasket.numberOfSkus(X_SKU) +
+        numberOfSkusInBasket.numberOfSkus(Y_SKU) +
+        numberOfSkusInBasket.numberOfSkus(Z_SKU) / numberOfSkusFromGroupEligibleForDiscount > 0) {
+            listOfSkus.stream().filter((sku) -> sku.matches("^[STXYZ]$")).
+        }
+
+
+
         return
             discountForEachFiveAs.discount() + discountForEachTripleA.discount() +
             discountForEachTenHs.discount() + discountForEachFiveHs.discount() +
