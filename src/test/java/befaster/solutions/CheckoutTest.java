@@ -192,7 +192,7 @@ public class CheckoutTest {
     }
 
     @Test
-    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_five_A_and_each_ten_H_SKUs_in_basket() {
+    public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_five_H_and_each_ten_H_SKUs_in_basket() {
         int discountForFiveHsSkuInBasket = 5;
         int discountForTenHsSkuInBasket = 20;
         String skusWithDiscountForFiveHs = "HHHHH";
@@ -229,6 +229,24 @@ public class CheckoutTest {
         assertThat(Checkout.checkout(skusWithDoubleEAndMultipleB), is(totalCheckoutValueForDoubleEAndMultipleB));
         assertThat(Checkout.checkout(skusWithoutBAndDoubleEs), is(totalCheckoutValueForBasketWithoutBAndDoublesEs));
         assertThat(Checkout.checkout(skusWithAllBsDiscounted), is(totalCheckoutValueForAllBsDiscounted));
+    }
+
+    @Test
+    public void should_return_sum_of_prices_for_given_skus_including_one_free_Q_sku_for_each_triple_R_in_basket() {
+        int discountForTripleQSkuInBasket = 10;
+        String skusWithTripleRAndSingleQ = "RRQR";
+        int totalCheckoutValueForTripleRAndSingleQ = 3 * R_SKU_PRICE;
+        String skusWithTripleRAndTripleQ = "RRQRQQQ";
+        int totalCheckoutValueForTripleRAndTripleQ = 3 * R_SKU_PRICE + 3 * Q_SKU_PRICE - discountForTripleQSkuInBasket;
+        String skusWithoutQAndMultipleTripleR = "RRRRRR";
+        int totalCheckoutValueForBasketWithoutQAndMultipleTripleR = 6 * R_SKU_PRICE;
+        String skusWithAllQsDiscounted = "RRRRRRQQ";
+        int totalCheckoutValueForAllBsDiscounted = 6 * R_SKU_PRICE;
+
+        assertThat(Checkout.checkout(skusWithTripleRAndSingleQ), is(totalCheckoutValueForTripleRAndSingleQ));
+        assertThat(Checkout.checkout(skusWithTripleRAndTripleQ), is(totalCheckoutValueForTripleRAndTripleQ));
+        assertThat(Checkout.checkout(skusWithoutQAndMultipleTripleR), is(totalCheckoutValueForBasketWithoutQAndMultipleTripleR));
+        assertThat(Checkout.checkout(skusWithAllQsDiscounted), is(totalCheckoutValueForAllBsDiscounted));
     }
 
     @Test
