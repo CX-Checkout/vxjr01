@@ -42,11 +42,10 @@ public class Checkout {
         DiscountForMultipleSkus discountForEachFiveAs = new DiscountForMultipleSkus(numberOfSkusInBasket.getOrDefault(A_SKU, 0), 5, discountForFiveAs);
         DiscountForMultipleSkus discountForEachTripleA = new DiscountForMultipleSkus(numberOfSkusInBasket.getOrDefault(A_SKU, 0) - discountForEachFiveAs.numberOfDiscountedSkus(), 3, discountForTripleA);
         FreeSkuForNumberOfAnotherSkus freeBForEachTwoEs = new FreeSkuForNumberOfAnotherSkus(numberOfSkusInBasket.getOrDefault(B_SKU, 0), numberOfSkusInBasket.getOrDefault(E_SKU, 0), 2, priceMap.get(B_SKU));
+        DiscountForMultipleSkus discountForEachDoubleB = new DiscountForMultipleSkus(numberOfSkusInBasket.getOrDefault(B_SKU, 0) - freeBForEachTwoEs.numberOfDiscountedSkus(), 2, discountForDoubleB);
         int discounts =
-                discountForEachFiveAs.discount() +
-                discountForEachTripleA.discount() +
-                freeBForEachTwoEs.discount() +
-                discountForEachDoubleBSkuInBasket(numberOfSkusInBasket.getOrDefault(B_SKU, 0) - freeBForEachTwoEs.numberOfDiscountedSkus()) +
+                discountForEachFiveAs.discount() + discountForEachTripleA.discount() +
+                freeBForEachTwoEs.discount() + discountForEachDoubleB.discount() +
                 freeOneFForEachThreeFsInBasket(numberOfSkusInBasket.getOrDefault(F_SKU,0));
 
         return listOfSkusInBasket.stream().mapToInt(priceMap::get).sum() - discounts;
@@ -62,10 +61,6 @@ public class Checkout {
 
     private static Integer freeOneFForEachThreeFsInBasket(Integer numberOfFSkusInBasket) {
         return new DiscountForMultipleSkus(numberOfFSkusInBasket, 3, priceMap.get(F_SKU)).discount();
-    }
-
-    private static int discountForEachDoubleBSkuInBasket(Integer numberOfBSkusInBasket) {
-        return new DiscountForMultipleSkus(numberOfBSkusInBasket, 2,  discountForDoubleB).discount();
     }
 
     public static final class DiscountForMultipleSkus {
