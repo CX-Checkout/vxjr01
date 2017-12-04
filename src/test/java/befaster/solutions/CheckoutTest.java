@@ -198,6 +198,24 @@ public class CheckoutTest {
     }
 
     @Test
+    public void should_return_sum_of_prices_for_given_skus_including_one_free_M_sku_for_each_double_E_in_basket() {
+        int discountForDoubleBSkuInBasket = 15;
+        String skusWithDoubleEAndSingleB = "EBE";
+        int totalCheckoutValueForDoubleEAndSingleB = 2 * E_SKU_PRICE;
+        String skusWithDoubleEAndMultipleB = "EBEBB";
+        int totalCheckoutValueForDoubleEAndMultipleB = 2 * E_SKU_PRICE + 2 * B_SKU_PRICE - discountForDoubleBSkuInBasket;
+        String skusWithoutBAndDoubleEs = "EEEE";
+        int totalCheckoutValueForBasketWithoutBAndDoublesEs = 4 * E_SKU_PRICE;
+        String skusWithAllBsDiscounted = "EEEEBB";
+        int totalCheckoutValueForAllBsDiscounted = 4 * E_SKU_PRICE;
+
+        assertThat(Checkout.checkout(skusWithDoubleEAndSingleB), is(totalCheckoutValueForDoubleEAndSingleB));
+        assertThat(Checkout.checkout(skusWithDoubleEAndMultipleB), is(totalCheckoutValueForDoubleEAndMultipleB));
+        assertThat(Checkout.checkout(skusWithoutBAndDoubleEs), is(totalCheckoutValueForBasketWithoutBAndDoublesEs));
+        assertThat(Checkout.checkout(skusWithAllBsDiscounted), is(totalCheckoutValueForAllBsDiscounted));
+    }
+
+    @Test
     public void should_return_sum_of_prices_for_given_skus_including_one_free_F_for_each_3_F_SKUs_in_basket() {
         String skusWithThreeFs = "FFF";
         int totalCheckoutValueForThreeFs = 2 * F_SKU_PRICE;
