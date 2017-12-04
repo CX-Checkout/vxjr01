@@ -198,21 +198,17 @@ public class CheckoutTest {
     }
 
     @Test
-    public void should_return_sum_of_prices_for_given_skus_including_one_free_M_sku_for_each_double_E_in_basket() {
-        int discountForDoubleBSkuInBasket = 15;
-        String skusWithDoubleEAndSingleB = "EBE";
-        int totalCheckoutValueForDoubleEAndSingleB = 2 * E_SKU_PRICE;
-        String skusWithDoubleEAndMultipleB = "EBEBB";
-        int totalCheckoutValueForDoubleEAndMultipleB = 2 * E_SKU_PRICE + 2 * B_SKU_PRICE - discountForDoubleBSkuInBasket;
-        String skusWithoutBAndDoubleEs = "EEEE";
-        int totalCheckoutValueForBasketWithoutBAndDoublesEs = 4 * E_SKU_PRICE;
-        String skusWithAllBsDiscounted = "EEEEBB";
-        int totalCheckoutValueForAllBsDiscounted = 4 * E_SKU_PRICE;
+    public void should_return_sum_of_prices_for_given_skus_including_one_free_M_sku_for_each_triple_N_in_basket() {
+        String skusWithTripleNAndSingleM = "NNMN";
+        int totalCheckoutValueForTripleNAndSingleM = 3 * N_SKU_PRICE;
+        String skusWithoutMAndTripleNs = "NNNN";
+        int totalCheckoutValueForBasketWithoutMAndTripleNs = 4 * N_SKU_PRICE;
+        String skusWithAllMsDiscounted = "NNNNNNMM";
+        int totalCheckoutValueForAllNsDiscounted = 6 * N_SKU_PRICE;
 
-        assertThat(Checkout.checkout(skusWithDoubleEAndSingleB), is(totalCheckoutValueForDoubleEAndSingleB));
-        assertThat(Checkout.checkout(skusWithDoubleEAndMultipleB), is(totalCheckoutValueForDoubleEAndMultipleB));
-        assertThat(Checkout.checkout(skusWithoutBAndDoubleEs), is(totalCheckoutValueForBasketWithoutBAndDoublesEs));
-        assertThat(Checkout.checkout(skusWithAllBsDiscounted), is(totalCheckoutValueForAllBsDiscounted));
+        assertThat(Checkout.checkout(skusWithTripleNAndSingleM), is(totalCheckoutValueForTripleNAndSingleM));
+        assertThat(Checkout.checkout(skusWithoutMAndTripleNs), is(totalCheckoutValueForBasketWithoutMAndTripleNs));
+        assertThat(Checkout.checkout(skusWithAllMsDiscounted), is(totalCheckoutValueForAllNsDiscounted));
     }
 
     @Test
