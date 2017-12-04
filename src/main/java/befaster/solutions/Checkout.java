@@ -74,7 +74,7 @@ public class Checkout {
     }
 
     private static int discountForEachDoubleBSkuInBasket(Integer numberOfBSkusInBasket) {
-        return (numberOfBSkusInBasket / 2) * discountForDoubleB;
+        return new DiscountForMultipleSkus(numberOfBSkusInBasket, 2,  discountForDoubleB).discount();
     }
 
     private static int discountForEachTripleASkuInBasket(Integer numberOfASkusInBasket) {
@@ -83,5 +83,21 @@ public class Checkout {
 
     private static int discountForEachFiveASkuInBasket(Integer numberOfASkusInBasket) {
         return (numberOfASkusInBasket / 5) * discountForFiveAs;
+    }
+
+    public static final class DiscountForMultipleSkus {
+        private final int numberOfSkus;
+        private final int numberOfSkusTriggeringDiscount;
+        private final int discountAmount;
+
+        public DiscountForMultipleSkus(int numberOfSkus, int numberOfSkusTriggeringDiscount, int discountAmount){
+            this.numberOfSkus = numberOfSkus;
+            this.numberOfSkusTriggeringDiscount = numberOfSkusTriggeringDiscount;
+            this.discountAmount = discountAmount;
+        }
+
+        public int discount() {
+            return (numberOfSkus / numberOfSkusTriggeringDiscount) * discountAmount;
+        }
     }
 }
