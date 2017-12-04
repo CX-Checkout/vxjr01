@@ -126,7 +126,7 @@ public class CheckoutTest {
         String skusWithDiscountForTripleQMultipleTimes = "QQQQQQQQQ";
         int totalCheckoutValueForDiscountedMultipleTimesBasket = 9 * B_SKU_PRICE - 3 * discountForTripleKSkuInBasket;
         String skusWithDiscountForTripleQWithOtherSkus = "QDQDQDQDQDQDQD";
-        int totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus = 6 * Q_SKU_PRICE + 6 * D_SKU_PRICE - 2 * discountForTripleKSkuInBasket;
+        int totalCheckoutValueForDiscountedMultipleTimesBasketWithOtherSkus = 7 * Q_SKU_PRICE + 7 * D_SKU_PRICE - 2 * discountForTripleKSkuInBasket;
 
         assertThat(Checkout.checkout(skusWithDiscountForTripleQ), is(totalCheckoutValueForBasket));
         assertThat(Checkout.checkout(skusWithDiscountForTripleQMultipleTimes),
