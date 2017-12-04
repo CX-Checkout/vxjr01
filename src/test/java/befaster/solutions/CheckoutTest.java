@@ -331,10 +331,19 @@ public class CheckoutTest {
     @Test
     public void should_return_sum_of_prices_for_given_skus_including_group_discount_for_S_T_X_Y_Z_when_basket_contains_at_least_three_skus_from_group() {
         int totalPriceForEachThreeSkusFromGroup = 45;
-        List<String> skusWitoutDiscount = asList("STZ", "ZXY", "XSZ", "TYZ", "SYZ");
+        List<String> skusWitoutDiscount = asList("STZ", "ZXY", "XSZ", "TYZ", "SYZ", "TYZSYZ", "TYZXXZS");
+        Map<String, Integer> skusWithoutDiscountTotalCheckouts = new HashMap<String, Integer>() {{
+            put("STZ", totalPriceForEachThreeSkusFromGroup);
+            put("ZXY", totalPriceForEachThreeSkusFromGroup);
+            put("XSZ", totalPriceForEachThreeSkusFromGroup);
+            put("TYZ", totalPriceForEachThreeSkusFromGroup);
+            put("SYZ", totalPriceForEachThreeSkusFromGroup);
+            put("TYZSYZ", 2 * totalPriceForEachThreeSkusFromGroup);
+            put("TYZXXZS", 2 * totalPriceForEachThreeSkusFromGroup + S_SKU_PRICE);
 
+        }};
         skusWitoutDiscount.forEach(
-                skusStringWithoutDiscount -> assertThat(Checkout.checkout(skusStringWithoutDiscount), is(totalPriceForEachThreeSkusFromGroup))
+                skusStringWithoutDiscount -> assertThat(Checkout.checkout(skusStringWithoutDiscount), is(skusWithoutDiscountTotalCheckouts.get(skusStringWithoutDiscount)))
         );
     }
 
