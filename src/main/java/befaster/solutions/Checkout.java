@@ -39,22 +39,16 @@ public class Checkout {
         List<String> listOfSkusInBasket = skus.isEmpty() ? emptyList() : asList(skus.split(""));
 
         Map<String, Integer> numberOfSkusInBasket = numberOfEachSkuInBasket(listOfSkusInBasket);
+        DiscountForMultipleSkus discountForEachFiveAs = new DiscountForMultipleSkus(numberOfSkusInBasket.getOrDefault(A_SKU, 0), 5, discountForFiveAs);
+        DiscountForMultipleSkus discountForEachTripleA = new DiscountForMultipleSkus(numberOfSkusInBasket.getOrDefault(A_SKU, 0) - discountForEachFiveAs.numberOfDiscountedSkus(), 3, discountForTripleA);
         int discounts =
-                discountForEachFiveASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0)) +
-                discountForEachTripleASkuInBasket(numberOfSkusInBasket.getOrDefault(A_SKU, 0) - numberOfSkusDiscountedForFiveASkus(numberOfSkusInBasket.getOrDefault(A_SKU, 0))) +
+                discountForEachFiveAs.discount() +
+                discountForEachTripleA.discount() +
                 discountForEachDoubleBSkuInBasket(numberOfSkusInBasket.getOrDefault(B_SKU, 0) - numberOfFreeBSkusForEachDoubleE(numberOfSkusInBasket.getOrDefault(B_SKU, 0), numberOfSkusInBasket.getOrDefault(E_SKU, 0))) +
                 freeOneBForEachDoubleE(numberOfSkusInBasket.getOrDefault(B_SKU, 0), numberOfSkusInBasket.getOrDefault(E_SKU, 0)) +
                 freeOneFForEachThreeFsInBasket(numberOfSkusInBasket.getOrDefault(F_SKU,0));
 
         return listOfSkusInBasket.stream().mapToInt(priceMap::get).sum() - discounts;
-    }
-
-    private static Integer numberOfFreeBSkusForEachDoubleE(Integer numberOfBSkusInBasket, Integer numberOfESkusInBasket) {
-        return Math.min(numberOfESkusInBasket / 2, numberOfBSkusInBasket);
-    }
-
-    private static Integer numberOfSkusDiscountedForFiveASkus(Integer numberOfASkusInBasket) {
-        return (numberOfASkusInBasket / 5) * 5;
     }
 
     private static boolean containsValidSkus(String skus) {
@@ -69,20 +63,16 @@ public class Checkout {
         return new FreeSkuForNumberOfAnotherSkus(numberOfBSkusInBasket, numberOfESkusInBasket, 2, priceMap.get(B_SKU)).discount();
     }
 
+    private static Integer numberOfFreeBSkusForEachDoubleE(Integer numberOfBSkusInBasket, Integer numberOfESkusInBasket) {
+        return Math.min(numberOfESkusInBasket / 2, numberOfBSkusInBasket);
+    }
+
     private static Integer freeOneFForEachThreeFsInBasket(Integer numberOfFSkusInBasket) {
         return new DiscountForMultipleSkus(numberOfFSkusInBasket, 3, priceMap.get(F_SKU)).discount();
     }
 
     private static int discountForEachDoubleBSkuInBasket(Integer numberOfBSkusInBasket) {
         return new DiscountForMultipleSkus(numberOfBSkusInBasket, 2,  discountForDoubleB).discount();
-    }
-
-    private static int discountForEachTripleASkuInBasket(Integer numberOfASkusInBasket) {
-        return new DiscountForMultipleSkus(numberOfASkusInBasket, 3, discountForTripleA).discount();
-    }
-
-    private static int discountForEachFiveASkuInBasket(Integer numberOfASkusInBasket) {
-        return new DiscountForMultipleSkus(numberOfASkusInBasket, 5, discountForFiveAs).discount();
     }
 
     public static final class DiscountForMultipleSkus {
@@ -96,9 +86,15 @@ public class Checkout {
             this.discountAmount = discountAmount;
         }
 
+        public int numberOfDiscountedSkus() {
+            return (numberOfSkus / numberOfSkusTriggeringDiscount) * numberOfSkusTriggeringDiscount;
+        }
+
         public int discount() {
             return (numberOfSkus / numberOfSkusTriggeringDiscount) * discountAmount;
         }
+
+
     }
 
     public static final class FreeSkuForNumberOfAnotherSkus {
