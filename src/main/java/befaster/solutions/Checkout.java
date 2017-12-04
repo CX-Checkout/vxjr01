@@ -45,7 +45,7 @@ public class Checkout {
         put(H_SKU, 10);
         put(I_SKU, 35);
         put(J_SKU, 60);
-        put(K_SKU, 80);
+        put(K_SKU, 70);
         put(L_SKU, 90);
         put(M_SKU, 15);
         put(N_SKU, 40);
@@ -68,7 +68,7 @@ public class Checkout {
     private static final int discountForFiveAs = 50;
     private static final int discountForFiveHs = 5;
     private static final int discountForTenHs = 20;
-    private static final int discountForDoubleK = 10;
+    private static final int discountForDoubleK = 20;
     private static final int discountForFivePs = 50;
     private static final int discountForTripleQ = 10;
     private static final int discountForDoubleV = 10;

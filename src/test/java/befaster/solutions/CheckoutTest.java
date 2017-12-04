@@ -137,7 +137,7 @@ public class CheckoutTest {
 
     @Test
     public void should_return_sum_of_prices_for_given_skus_including_discounts_for_each_double_K_SKU_in_basket() {
-        int discountForDoubleKSkuInBasket = 10;
+        int discountForDoubleKSkuInBasket = 20;
         String skusWithDiscountForDoubleK = "KK";
         int totalCheckoutValueForBasket = 2 * K_SKU_PRICE - discountForDoubleKSkuInBasket;
         String skusWithDiscountForDoubleKMultipleTimes = "KKKKKKK";
