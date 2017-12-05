@@ -339,9 +339,19 @@ public class CheckoutTest {
             put("TYZ", totalPriceForEachThreeSkusFromGroup);
             put("SYZ", totalPriceForEachThreeSkusFromGroup);
             put("TYZSYZ", 2 * totalPriceForEachThreeSkusFromGroup);
-            put("TYZXXZS", 2 * totalPriceForEachThreeSkusFromGroup + S_SKU_PRICE);
+            put("TYZXXZS", 2 * totalPriceForEachThreeSkusFromGroup + X_SKU_PRICE);
+            put("SSSZ", 65); //20 + 45 (20 + 20 + 21
+            put("STXS", 62); //17 + 45 (20 + 20 + 20
+            put("STXZ", 62); //17 + 45 (20 + 20 + 21
+            //| S    | 20    |
+            //| T    | 20    |
+            //| X    | 17    |
+            //| Y    | 20    |
+            //| Z    | 21    |
+
 
         }};
+
         skusWitoutDiscount.forEach(
                 skusStringWithoutDiscount -> assertThat(Checkout.checkout(skusStringWithoutDiscount), is(skusWithoutDiscountTotalCheckouts.get(skusStringWithoutDiscount)))
         );
