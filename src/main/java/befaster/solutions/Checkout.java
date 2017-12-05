@@ -3,6 +3,7 @@ package befaster.solutions;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -160,7 +161,8 @@ public class Checkout {
                     .filter((sku) -> sku.matches("^[STXYZ]$"))
                     .mapToInt(priceMap::get)
                     .boxed()
-                    .sorted()
+                    .sorted(Collections.reverseOrder())
+                    .mapToInt(Integer::intValue)
                     .limit(((long)(numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount)) * numberOfSkusFromGroupEligibleForDiscount)
                     .sum() -
                     (numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount) * discountForGroup;
