@@ -158,8 +158,9 @@ public class Checkout {
         if ((numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount) > 0) {
             totalGroupDiscount = listOfSkus.stream()
                     .filter((sku) -> sku.matches("^[STXYZ]$"))
-                    .limit(((long)(numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount)) * numberOfSkusFromGroupEligibleForDiscount)
                     .mapToInt(priceMap::get)
+                    .sorted((f1, f2) -> f2)
+                    .limit(((long)(numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount)) * numberOfSkusFromGroupEligibleForDiscount)
                     .sum() -
                     (numberOfAllSkusFromGroup / numberOfSkusFromGroupEligibleForDiscount) * discountForGroup;
         }
